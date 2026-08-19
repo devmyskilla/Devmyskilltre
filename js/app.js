@@ -149,20 +149,21 @@ function bindEvents(){
 }
 
 
-async function loadFullCatalog(){
+async function loadCatalogManifest(){
   try{
-    const response=await fetch('catalogs/manifest.json',{cache:'no-store'}); if(!response.ok) return;
-    catalogManifest=await response.json(); renderStats(); renderPlatforms(); if($('catalogLoadStatus')) $('catalogLoadStatus').textContent=currentLang==='ar'?'جاري تحميل بيانات الدورات من المنصات...':currentLang==='tr'?'Platform kursları yükleniyor...':'Loading platform course catalogs...';
-    let sincePaint=0;
-    await CatalogRuntime.loadAll(catalogManifest,PLATFORMS_DATA,{concurrency:4,onPlatform:({id,courses})=>{
-      runtimePlatformCounts[id]=courses.length;
-      const added=CatalogRuntime.mergeUnique(COURSES_DATA,courses);
-      if($('catalogLoadStatus')) $('catalogLoadStatus').textContent=(currentLang==='ar'?`جاري التحميل: ${Object.keys(runtimePlatformCounts).length}/${catalogManifest.platformCount} منصة · ${COURSES_DATA.length} دورة`:(currentLang==='tr'?`Yükleniyor: ${Object.keys(runtimePlatformCounts).length}/${catalogManifest.platformCount} platform · ${COURSES_DATA.length} kurs`:`Loading: ${Object.keys(runtimePlatformCounts).length}/${catalogManifest.platformCount} platforms · ${COURSES_DATA.length} courses`));
-      if(added) sincePaint+=added;
-      if(sincePaint>=250){sincePaint=0; populateFilters(); renderStats(); renderCourses(); renderPlatforms();}
-    }});
-    populateFilters(); renderStats(); renderCourses(); renderPlatforms(); if($('catalogLoadStatus')) $('catalogLoadStatus').textContent=(currentLang==='ar'?`تم تحميل ${COURSES_DATA.length} دورة من الكتالوجات المتاحة.`:(currentLang==='tr'?`${COURSES_DATA.length} kurs yüklendi.`:`Loaded ${COURSES_DATA.length} courses from available catalogs.`));
-  }catch(err){console.warn('Catalog load failed',err);}
+    const response=await fetch('catalogs/manifest.json',{cache:'default'}); if(!response.ok) return;
+    catalogManifest=await response.json();
+    renderStats();
+    renderPlatforms();
+    if($('catalogLoadStatus')){
+      const total=CatalogRuntime.manifestTotal(catalogManifest).toLocaleString();
+      $('catalogLoadStatus').textContent=currentLang==='ar'
+        ? `يتوفر ${total} دورة عبر ${catalogManifest.platformCount||PLATFORMS_DATA.length} منصة. تُحمّل بيانات كل منصة عند فتحها حتى يبقى الموقع سريعًا.`
+        : currentLang==='tr'
+          ? `${total} kurs mevcut. Siteyi hızlı tutmak için her platformun verileri yalnızca açıldığında yüklenir.`
+          : `${total} courses are available. Each platform catalog loads only when opened to keep the site fast.`;
+    }
+  }catch(err){console.warn('Catalog manifest load failed',err);}
 }
 
-document.addEventListener('DOMContentLoaded',()=>{ const lang=new URLSearchParams(location.search).get('lang'); setLang(lang||currentLang); initTheme(); applyTranslations(); $('langSwitcher').value=currentLang; renderStats(); populateFilters(); renderCategoryChips(); renderPaths(); renderCourses(); renderPlatforms(); bindEvents(); registerPWA(); loadFullCatalog(); });
+document.addEventListener('DOMContentLoaded',()=>{ const lang=new URLSearchParams(location.search).get('lang'); setLang(lang||currentLang); initTheme(); applyTranslations(); $('langSwitcher').value=currentLang; renderStats(); populateFilters(); renderCategoryChips(); renderPaths(); renderCourses(); renderPlatforms(); bindEvents(); registerPWA(); loadCatalogManifest(); });
