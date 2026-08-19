@@ -18,7 +18,50 @@ function compareSet(){ return setFromStorage(STORAGE.compare); }
 function setTheme(theme){ document.documentElement.dataset.theme=theme; try{localStorage.setItem(STORAGE.theme,theme)}catch(_){} if($('themeToggle')) $('themeToggle').textContent=theme==='dark'?'☀':'◐'; }
 function initTheme(){ let saved; try{saved=localStorage.getItem(STORAGE.theme)}catch(_){} const preferred=matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light'; setTheme(saved||preferred); }
 
-function renderStats(){ const s=CourseCatalog.getPlatformStats(COURSES_DATA); $('statCourses').textContent=s.courses; $('statPlatforms').textContent=s.platforms; $('statFree').textContent=s.free; $('statCert').textContent=s.certificates; }
+function renderStats(){ const s=CourseCatalog.getCatalogStats(PLATFORMS_DATA,COURSES_DATA); $('statCourses').textContent=s.courses; $('statPlatforms').textContent=s.platforms; $('statFree').textContent=s.free; $('statCert').textContent=s.certificates; }
+
+
+function platformText(platform, field='description'){
+  if(currentLang==='en') return platform[field+'_en']||platform[field]||'';
+  if(currentLang==='tr') return platform[field+'_tr']||platform[field]||'';
+  return platform[field]||'';
+}
+function platformMatchKey(value){ return CourseCatalog.normalizeText(value).replace(/\s+/g,''); }
+function indexedCoursesForPlatform(platform){
+  const key=platformMatchKey(platform.name);
+  return COURSES_DATA.filter(course=>{
+    const values=[course.platform,course.provider].filter(Boolean).map(platformMatchKey);
+    return values.some(v=>v===key||v.includes(key)||key.includes(v));
+  });
+}
+function renderPlatforms(){
+  const grid=$('platformsGrid'); if(!grid||!Array.isArray(PLATFORMS_DATA)) return;
+  const query=$('platformSearch')?.value||'';
+  const list=CourseCatalog.searchPlatforms(PLATFORMS_DATA,query);
+  $('platformResultsCount').textContent=list.length;
+  grid.innerHTML=list.map(platform=>{
+    const indexed=indexedCoursesForPlatform(platform);
+    const desc=platformText(platform);
+    return `<article class="platform-card">
+      <div class="platform-card-head"><img src="${escapeHtml(platform.thumbnail||'icon.svg')}" alt="" loading="lazy"><div><h3>${escapeHtml(platform.name)}</h3><small>${escapeHtml(platform.category||'')}</small></div></div>
+      <p>${escapeHtml(desc)}</p>
+      <div class="platform-meta"><span>${platform.free?'✓ '+getText('free'):getText('paid')}</span>${platform.certificate?`<span>🎓 ${getText('certificate')}</span>`:''}<span>🌐 ${escapeHtml(platform.language||'')}</span></div>
+      <div class="platform-index-status"><strong>${indexed.length}</strong><span>${getText('indexedCourses')}</span></div>
+      <div class="platform-card-actions"><a class="mini-btn" href="platform.html?id=${encodeURIComponent(platform.id)}&lang=${encodeURIComponent(currentLang)}">${getText('browsePlatform')} ↗</a><a class="btn soft small" href="${escapeHtml(platform.link)}" target="_blank" rel="noopener noreferrer">${getText('officialCatalog')} ↗</a></div>
+    </article>`;
+  }).join('')||`<div class="no-results"><span>⌕</span><strong>${getText('noPlatforms')}</strong></div>`;
+}
+function openIndexedPlatform(platformId){
+  const platform=PLATFORMS_DATA.find(p=>p.id===platformId); if(!platform)return;
+  const indexed=indexedCoursesForPlatform(platform); if(!indexed.length)return;
+  activeTab='all'; activeCategory='';
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab==='all'));
+  resetFilters();
+  const coursePlatform=indexed[0].platform;
+  $('filterPlatform').value=coursePlatform;
+  renderCourses();
+  $('catalog').scrollIntoView({behavior:'smooth'});
+}
 
 function categoryEntries(){ const icons={programming:'💻',data:'📊',ai:'🤖',cybersecurity:'🛡️',marketing:'📣','project-management':'🧭',languages:'🌐'}; return [...new Set(COURSES_DATA.map(c=>c.category))].map(key=>({key,icon:icons[key]||'✦',count:COURSES_DATA.filter(c=>c.category===key).length})); }
 function renderCategoryChips(){ const wrap=$('categoryChips'); wrap.innerHTML=`<button class="category-chip ${!activeCategory?'active':''}" data-category=""><span>✨</span><b>${getText('all')}</b><small>${COURSES_DATA.length}</small></button>`+categoryEntries().map(c=>`<button class="category-chip ${activeCategory===c.key?'active':''}" data-category="${c.key}"><span>${c.icon}</span><b>${escapeHtml(categoryLabel(c.key))}</b><small>${c.count}</small></button>`).join(''); }
@@ -83,18 +126,18 @@ function showPath(pathId){ const path=LEARNING_PATHS.find(p=>p.id===pathId); if(
 async function shareCourse(id){ const course=COURSES_DATA.find(c=>c.id===id); if(!course)return; const url=new URL(detailUrl(course),location.href).href; try{ if(navigator.share) await navigator.share({title:courseField(course,'title'),text:courseField(course,'summary'),url}); else {await navigator.clipboard.writeText(url);showToast(getText('copied'));} }catch(_){} }
 
 function resetFilters(){ activeCategory=''; ['filterCategory','filterLevel','filterPlatform','filterLanguage','filterDuration'].forEach(id=>$(id).value=''); $('filterFree').checked=false;$('filterCertificate').checked=false;$('sortSelect').value='recommended';$('catalogSearch').value='';$('searchInput').value='';renderCourses(); }
-function changeLanguage(lang){ setLang(lang); applyTranslations(); populateFilters(); renderStats(); renderPaths(); renderCourses(); buildQuiz(); }
+function changeLanguage(lang){ setLang(lang); applyTranslations(); populateFilters(); renderStats(); renderPaths(); renderCourses(); renderPlatforms(); buildQuiz(); }
 function registerPWA(){ if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{})); addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;$('installBtn').hidden=false}); $('installBtn').addEventListener('click',async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$('installBtn').hidden=true}); }
 
 function bindEvents(){
-  $('themeToggle').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'); $('langSwitcher').onchange=e=>changeLanguage(e.target.value);
+  $('themeToggle').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'); $('langSwitcher').onchange=e=>changeLanguage(e.target.value); if($('platformSearch')) $('platformSearch').addEventListener('input',renderPlatforms);
   $('searchInput').addEventListener('input',e=>{$('catalogSearch').value=e.target.value;renderCourses();}); $('catalogSearch').addEventListener('input',e=>{$('searchInput').value=e.target.value;renderCourses();});
   ['filterCategory','filterLevel','filterPlatform','filterLanguage','filterDuration','sortSelect','filterFree','filterCertificate'].forEach(id=>$(id).addEventListener('change',()=>{if(id==='filterCategory')activeCategory=$('filterCategory').value;renderCourses()})); $('resetFilters').onclick=resetFilters;
   $('categoryChips').addEventListener('click',e=>{const btn=e.target.closest('[data-category]');if(!btn)return;activeCategory=btn.dataset.category;$('filterCategory').value=activeCategory;renderCourses();document.getElementById('catalog').scrollIntoView({behavior:'smooth'});});
   document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{activeTab=btn.dataset.tab;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));renderCourses()});
-  document.addEventListener('click',e=>{const a=e.target.closest('[data-action]'); if(a){e.preventDefault();const id=a.dataset.id;if(a.dataset.action==='favorite')toggleFavorite(id);if(a.dataset.action==='compare')toggleCompare(id);if(a.dataset.action==='share')shareCourse(id);} const close=e.target.closest('[data-close]');if(close)closeModal(close.dataset.close);const path=e.target.closest('[data-open-path]');if(path)showPath(path.dataset.openPath);if(e.target.classList.contains('modal'))closeModal(e.target.id);});
+  document.addEventListener('click',e=>{const a=e.target.closest('[data-action]'); if(a){e.preventDefault();const id=a.dataset.id;if(a.dataset.action==='favorite')toggleFavorite(id);if(a.dataset.action==='compare')toggleCompare(id);if(a.dataset.action==='share')shareCourse(id);} const close=e.target.closest('[data-close]');if(close)closeModal(close.dataset.close);const path=e.target.closest('[data-open-path]');if(path)showPath(path.dataset.openPath);const platformBtn=e.target.closest('[data-platform-courses]');if(platformBtn)openIndexedPlatform(platformBtn.dataset.platformCourses);if(e.target.classList.contains('modal'))closeModal(e.target.id);});
   $('clearCompare').onclick=()=>{writeJSON(STORAGE.compare,[]);renderCourses()}; $('compareNow').onclick=buildCompare; $('heroQuizBtn').onclick=()=>{buildQuiz();openModal('quizModal')}; $('randomBtn').onclick=()=>{const list=getVisibleCourses().length?getVisibleCourses():COURSES_DATA;location.href=detailUrl(list[Math.floor(Math.random()*list.length)])};
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$('searchInput').focus()}if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id));});
 }
 
-document.addEventListener('DOMContentLoaded',()=>{ const lang=new URLSearchParams(location.search).get('lang'); setLang(lang||currentLang); initTheme(); applyTranslations(); $('langSwitcher').value=currentLang; renderStats(); populateFilters(); renderCategoryChips(); renderPaths(); renderCourses(); bindEvents(); registerPWA(); });
+document.addEventListener('DOMContentLoaded',()=>{ const lang=new URLSearchParams(location.search).get('lang'); setLang(lang||currentLang); initTheme(); applyTranslations(); $('langSwitcher').value=currentLang; renderStats(); populateFilters(); renderCategoryChips(); renderPaths(); renderCourses(); renderPlatforms(); bindEvents(); registerPWA(); });

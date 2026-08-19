@@ -83,6 +83,43 @@
     return list.sort((a, b) => (b.editorialScore || 0) - (a.editorialScore || 0) || Number(b.featured) - Number(a.featured));
   }
 
+
+  function searchablePlatformText(platform) {
+    return normalizeText([
+      platform.name, platform.platform, platform.category, platform.language,
+      platform.description, platform.description_en, platform.description_tr
+    ].join(' '));
+  }
+
+  function searchPlatforms(platforms, query) {
+    const q = normalizeText(query);
+    if (!q) return [...platforms];
+    const tokens = q.split(' ').filter(Boolean);
+    return platforms.filter(platform => {
+      const hay = searchablePlatformText(platform);
+      return tokens.every(token => hay.includes(token));
+    });
+  }
+
+  function countCoursesByPlatform(courses) {
+    return courses.reduce((acc, course) => {
+      const key = course.platform || 'Unknown';
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {});
+  }
+
+  function getCatalogStats(platforms, courses) {
+    const counts = countCoursesByPlatform(courses);
+    return {
+      platforms: platforms.length,
+      indexedPlatforms: Object.keys(counts).length,
+      courses: courses.length,
+      free: courses.filter(x => x.free).length,
+      certificates: courses.filter(x => x.certificate).length
+    };
+  }
+
   function getPlatformStats(courses) {
     return {
       courses: courses.length,
@@ -92,5 +129,5 @@
     };
   }
 
-  return { normalizeText, searchCourses, filterCourses, sortCourses, scoreCourseMatch, getDurationBucket, getPlatformStats };
+  return { normalizeText, searchCourses, filterCourses, sortCourses, scoreCourseMatch, getDurationBucket, getPlatformStats, searchPlatforms, countCoursesByPlatform, getCatalogStats };
 });
