@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#4f46e5">
+  <title>تفاصيل الدورة | دنيا الدورات</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="css/style.css">
+</head>
+<body class="detail-page">
+<header class="site-header"><div class="container nav-inner"><a class="brand" href="index.html"><span class="brand-mark">د</span><span><strong>دنيا الدورات</strong><small data-i18n="developedBy">تطوير اتحاد شباب الأمة</small></span></a><div class="nav-actions"><button id="themeToggle" class="icon-btn">◐</button><select id="langSwitcher" class="lang-select"><option value="ar">العربية</option><option value="en">English</option><option value="tr">Türkçe</option></select></div></div></header>
+<main class="container detail-main">
+  <a class="back-link" href="index.html#catalog" data-i18n="backToCourses">العودة إلى الدورات</a>
+  <div id="detailLoading" class="detail-loading" data-i18n="loading">جاري التحميل...</div>
+  <article id="detailContent" class="detail-content" hidden>
+    <section class="detail-hero"><div class="detail-logo-wrap"><img id="courseThumb" class="detail-thumb" alt=""></div><div><div class="detail-badges" id="detailBadges"></div><h1 id="courseTitle"></h1><p class="detail-provider" id="courseProvider"></p><p class="detail-summary" id="courseSummary"></p><div class="detail-actions"><a id="officialLink" class="btn primary" target="_blank" rel="noopener"><span data-i18n="openOfficial">افتح المصدر الرسمي</span> ↗</a><button id="favoriteBtn" class="btn soft">♥ <span data-i18n="save">حفظ</span></button><button id="shareBtn" class="btn soft">↗ <span data-i18n="share">مشاركة</span></button></div></div></section>
+    <div class="decision-grid" id="courseFacts"></div>
+    <section class="detail-section why-box"><span class="section-kicker" data-i18n="editorialView">رؤية تحريرية</span><h2 data-i18n="whyRecommended">لماذا نرشح هذه الدورة؟</h2><p id="courseWhy"></p><div id="courseRatings" class="rating-grid"></div></section>
+    <div class="detail-columns">
+      <section class="detail-section"><h2>🎯 <span data-i18n="whatYouLearn">ماذا ستتعلم؟</span></h2><ul id="courseOutcomes" class="check-list"></ul></section>
+      <section class="detail-section"><h2>👤 <span data-i18n="whoFor">لمن تناسب؟</span></h2><ul id="courseAudience" class="plain-list"></ul></section>
+      <section class="detail-section"><h2>🧩 <span data-i18n="prerequisites">المتطلبات</span></h2><ul id="coursePrerequisites" class="plain-list"></ul></section>
+      <section class="detail-section"><h2>🛠 <span data-i18n="skills">المهارات</span></h2><div id="courseSkills" class="skill-row wrap"></div></section>
+    </div>
+    <section class="verification-box"><div><small data-i18n="lastVerified">آخر تحقق من المعلومات</small><strong id="courseVerified"></strong></div><p data-i18n="verificationNote">قد تتغير الأسعار أو شروط الشهادة. المصدر الرسمي هو المرجع النهائي قبل التسجيل.</p></section>
+    <section class="detail-section"><div class="section-heading"><div><span class="section-kicker" data-i18n="nextStep">خطوتك التالية</span><h2 data-i18n="continueLearning">ماذا تتعلم بعدها؟</h2></div></div><div id="nextCourses" class="courses-grid compact"></div></section>
+    <section class="detail-section"><div class="section-heading"><div><span class="section-kicker" data-i18n="similar">بدائل مشابهة</span><h2 data-i18n="similarCourses">دورات قد تناسب نفس الهدف</h2></div></div><div id="similarCourses" class="courses-grid compact"></div></section>
+  </article>
+  <div id="notFound" class="no-results" hidden data-i18n="courseNotFound">لم نجد هذه الدورة.</div>
+</main>
+<div id="toast" class="toast"></div>
+<footer class="site-footer"><div class="container footer-grid"><div><strong>دنيا الدورات</strong><p data-i18n="footerTagline">دليل ذكي للدورات والمسارات التعليمية</p></div><div class="footer-dev"><span>✦</span><div><small data-i18n="developedBy">تطوير اتحاد شباب الأمة</small><strong>اتحاد شباب الأمة</strong></div></div><p>© 2026</p></div></footer>
+<script src="js/i18n.js"></script><script src="js/data.js"></script><script src="js/catalog-core.js"></script><script src="js/detail.js"></script>
+</body></html>
