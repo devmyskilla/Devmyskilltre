@@ -1,0 +1,1106 @@
+{
+  "generatedAt": "2026-08-19T19:30:54.030439+00:00",
+  "platformCount": 110,
+  "platforms": {
+    "plat-1": {
+      "id": "plat-1",
+      "name": "FutureLearn",
+      "sourceUrl": "https://www.futurelearn.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-2": {
+      "id": "plat-2",
+      "name": "Agora",
+      "sourceUrl": "https://agora.unicef.org/local/catalogue/index.php?filters[]=133",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-3": {
+      "id": "plat-3",
+      "name": "IBM Skills Build",
+      "sourceUrl": "https://skillsbuild.org/college-students/course-catalog",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-4": {
+      "id": "plat-4",
+      "name": "Forage",
+      "sourceUrl": "https://www.theforage.com/virtual-internships",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-5": {
+      "id": "plat-5",
+      "name": "Microsoft",
+      "sourceUrl": "https://learn.microsoft.com/en-us/training/browse/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-6": {
+      "id": "plat-6",
+      "name": "ITU Academy",
+      "sourceUrl": "https://academy.itu.int/training-courses/full-catalogue",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-7": {
+      "id": "plat-7",
+      "name": "Edx",
+      "sourceUrl": "https://www.edx.org/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-8": {
+      "id": "plat-8",
+      "name": "Code Academy",
+      "sourceUrl": "https://www.codecademy.com/catalog",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-9": {
+      "id": "plat-9",
+      "name": "Unitar",
+      "sourceUrl": "https://event.unitar.org/full-catalog?search=&type%5B3%5D=3&price%5Bmin%5D=0&price%5Bmax%5D=96591&date%5Bmin%5D=&date%5Bmax%5D=&quick_filter=all",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-10": {
+      "id": "plat-10",
+      "name": "Huawei",
+      "sourceUrl": "https://e.huawei.com/en/talent/learning/#/home",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-11": {
+      "id": "plat-11",
+      "name": "openlearn.aucegypt.edu",
+      "sourceUrl": "https://openlearn.aucegypt.edu/course/index.php?categoryid=2",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-12": {
+      "id": "plat-12",
+      "name": "HP Life",
+      "sourceUrl": "https://www.life-global.org/allcourses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-13": {
+      "id": "plat-13",
+      "name": "Nvidia",
+      "sourceUrl": "https://www.nvidia.com/en-us/training/self-paced-courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-14": {
+      "id": "plat-14",
+      "name": "Cisco",
+      "sourceUrl": "https://www.netacad.com/catalogs/learn",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-15": {
+      "id": "plat-15",
+      "name": "Open Learn",
+      "sourceUrl": "https://www.open.edu/openlearn/free-courses/full-catalogue",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-16": {
+      "id": "plat-16",
+      "name": "Google (Skillshop)",
+      "sourceUrl": "https://skillshop.withgoogle.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-17": {
+      "id": "plat-17",
+      "name": "Solo Learn",
+      "sourceUrl": "https://www.sololearn.com/en/learn",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-18": {
+      "id": "plat-18",
+      "name": "Research Academy",
+      "sourceUrl": "https://researcheracademy.elsevier.com/learn",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-19": {
+      "id": "plat-19",
+      "name": "W3 School",
+      "sourceUrl": "https://www.w3schools.com/where_to_start.asp",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-20": {
+      "id": "plat-20",
+      "name": "Khan Academy",
+      "sourceUrl": "https://www.khanacademy.org/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-21": {
+      "id": "plat-21",
+      "name": "Free Udemy",
+      "sourceUrl": "https://www.discudemy.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-22": {
+      "id": "plat-22",
+      "name": "Kaggle",
+      "sourceUrl": "https://www.kaggle.com/learn",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-23": {
+      "id": "plat-23",
+      "name": "GitHub Learn",
+      "sourceUrl": "https://skills.github.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-24": {
+      "id": "plat-24",
+      "name": "Google Cloud",
+      "sourceUrl": "https://www.skills.google/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-25": {
+      "id": "plat-25",
+      "name": "Free Code Camp",
+      "sourceUrl": "https://www.freecodecamp.org/learn",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-26": {
+      "id": "plat-26",
+      "name": "Coursera",
+      "sourceUrl": "https://www.coursera.org/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-27": {
+      "id": "plat-27",
+      "name": "Simple Learn",
+      "sourceUrl": "https://www.simplilearn.com/skillup-free-online-courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-28": {
+      "id": "plat-28",
+      "name": "Alison",
+      "sourceUrl": "https://alison.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-29": {
+      "id": "plat-29",
+      "name": "Saylor",
+      "sourceUrl": "https://learn.saylor.org/course/index.php",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-30": {
+      "id": "plat-30",
+      "name": "سطر Satr",
+      "sourceUrl": "https://satr.codes",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-31": {
+      "id": "plat-31",
+      "name": "إدراك Edraak",
+      "sourceUrl": "https://www.edraak.org/explore/?type=course",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-32": {
+      "id": "plat-32",
+      "name": "معارف Maaref",
+      "sourceUrl": "https://www.m3aarf.com/certified/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-33": {
+      "id": "plat-33",
+      "name": "رواق Rwaq",
+      "sourceUrl": "https://www.rwaq.org/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-34": {
+      "id": "plat-34",
+      "name": "DataCamp",
+      "sourceUrl": "https://www.datacamp.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-35": {
+      "id": "plat-35",
+      "name": "Semrush",
+      "sourceUrl": "https://www.semrush.com/academy/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-36": {
+      "id": "plat-36",
+      "name": "btkakademi.gov.tr",
+      "sourceUrl": "https://www.btkakademi.gov.tr/portal/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-37": {
+      "id": "plat-37",
+      "name": "MATLAB Academy",
+      "sourceUrl": "https://matlabacademy.mathworks.com/?page=1&fq=course&sort=featured",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-38": {
+      "id": "plat-38",
+      "name": "HubSpot Academy",
+      "sourceUrl": "https://academy.hubspot.com/courses?contentType=COURSE",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-39": {
+      "id": "plat-39",
+      "name": "HackerRank",
+      "sourceUrl": "https://www.hackerrank.com/skills-verification",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-40": {
+      "id": "plat-40",
+      "name": "كورسات",
+      "sourceUrl": "https://www.coursat.org/categories",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-41": {
+      "id": "plat-41",
+      "name": "Udemy",
+      "sourceUrl": "https://www.udemy.com/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-42": {
+      "id": "plat-42",
+      "name": "LinkedIn Learning",
+      "sourceUrl": "https://www.linkedin.com/learning/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-43": {
+      "id": "plat-43",
+      "name": "Pluralsight",
+      "sourceUrl": "https://www.pluralsight.com/browse",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-44": {
+      "id": "plat-44",
+      "name": "Skillshare",
+      "sourceUrl": "https://www.skillshare.com/en/browse",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-45": {
+      "id": "plat-45",
+      "name": "MasterClass",
+      "sourceUrl": "https://www.masterclass.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-46": {
+      "id": "plat-46",
+      "name": "Brilliant",
+      "sourceUrl": "https://brilliant.org/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-47": {
+      "id": "plat-47",
+      "name": "Educative",
+      "sourceUrl": "https://www.educative.io/explore",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-48": {
+      "id": "plat-48",
+      "name": "Treehouse",
+      "sourceUrl": "https://teamtreehouse.com/library",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-49": {
+      "id": "plat-49",
+      "name": "Scrimba",
+      "sourceUrl": "https://scrimba.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-50": {
+      "id": "plat-50",
+      "name": "Frontend Masters",
+      "sourceUrl": "https://frontendmasters.com/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-51": {
+      "id": "plat-51",
+      "name": "The Odin Project",
+      "sourceUrl": "https://www.theodinproject.com/paths",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-52": {
+      "id": "plat-52",
+      "name": "Exercism",
+      "sourceUrl": "https://exercism.org/tracks",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-53": {
+      "id": "plat-53",
+      "name": "Codewars",
+      "sourceUrl": "https://www.codewars.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-54": {
+      "id": "plat-54",
+      "name": "LeetCode",
+      "sourceUrl": "https://leetcode.com/explore/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-55": {
+      "id": "plat-55",
+      "name": "Dataquest",
+      "sourceUrl": "https://www.dataquest.io/paths/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-56": {
+      "id": "plat-56",
+      "name": "365 Data Science",
+      "sourceUrl": "https://365datascience.com/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-57": {
+      "id": "plat-57",
+      "name": "O'Reilly Learning",
+      "sourceUrl": "https://www.oreilly.com/online-learning/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-58": {
+      "id": "plat-58",
+      "name": "Udacity",
+      "sourceUrl": "https://www.udacity.com/catalog",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-59": {
+      "id": "plat-59",
+      "name": "Hyperskill",
+      "sourceUrl": "https://hyperskill.org/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-60": {
+      "id": "plat-60",
+      "name": "Linux Foundation Training",
+      "sourceUrl": "https://training.linuxfoundation.org/full-catalog/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-61": {
+      "id": "plat-61",
+      "name": "Red Hat Training",
+      "sourceUrl": "https://www.redhat.com/en/services/training-and-certification",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-62": {
+      "id": "plat-62",
+      "name": "AWS Skill Builder",
+      "sourceUrl": "https://skillbuilder.aws/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-63": {
+      "id": "plat-63",
+      "name": "Oracle MyLearn",
+      "sourceUrl": "https://mylearn.oracle.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-64": {
+      "id": "plat-64",
+      "name": "Salesforce Trailhead",
+      "sourceUrl": "https://trailhead.salesforce.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-65": {
+      "id": "plat-65",
+      "name": "SAP Learning",
+      "sourceUrl": "https://learning.sap.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-66": {
+      "id": "plat-66",
+      "name": "MongoDB University",
+      "sourceUrl": "https://learn.mongodb.com/catalog",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-67": {
+      "id": "plat-67",
+      "name": "Redis University",
+      "sourceUrl": "https://redis.io/tutorials/university/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-68": {
+      "id": "plat-68",
+      "name": "Elastic Training",
+      "sourceUrl": "https://www.elastic.co/training/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-69": {
+      "id": "plat-69",
+      "name": "Snowflake University",
+      "sourceUrl": "https://learn.snowflake.com/en/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-70": {
+      "id": "plat-70",
+      "name": "Databricks Academy",
+      "sourceUrl": "https://www.databricks.com/learn/training/home",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-71": {
+      "id": "plat-71",
+      "name": "Confluent Developer",
+      "sourceUrl": "https://developer.confluent.io/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-72": {
+      "id": "plat-72",
+      "name": "UiPath Academy",
+      "sourceUrl": "https://academy.uipath.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-73": {
+      "id": "plat-73",
+      "name": "Automation Anywhere University",
+      "sourceUrl": "https://pathfinder.automationanywhere.com/university",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-74": {
+      "id": "plat-74",
+      "name": "Celonis Academy",
+      "sourceUrl": "https://www.celonis.com/training/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-75": {
+      "id": "plat-75",
+      "name": "Unity Learn",
+      "sourceUrl": "https://learn.unity.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-76": {
+      "id": "plat-76",
+      "name": "Unreal Engine Learning",
+      "sourceUrl": "https://dev.epicgames.com/community/unreal-engine/learning",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-77": {
+      "id": "plat-77",
+      "name": "Blender Studio",
+      "sourceUrl": "https://studio.blender.org/training/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-78": {
+      "id": "plat-78",
+      "name": "Adobe Learn",
+      "sourceUrl": "https://www.adobe.com/learn",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-79": {
+      "id": "plat-79",
+      "name": "Canva Design School",
+      "sourceUrl": "https://www.canva.com/designschool/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-80": {
+      "id": "plat-80",
+      "name": "Interaction Design Foundation",
+      "sourceUrl": "https://www.interaction-design.org/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-81": {
+      "id": "plat-81",
+      "name": "Domestika",
+      "sourceUrl": "https://www.domestika.org/en/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-82": {
+      "id": "plat-82",
+      "name": "CreativeLive",
+      "sourceUrl": "https://www.creativelive.com/class",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-83": {
+      "id": "plat-83",
+      "name": "MIT OpenCourseWare",
+      "sourceUrl": "https://ocw.mit.edu/search/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-84": {
+      "id": "plat-84",
+      "name": "MITx Online",
+      "sourceUrl": "https://mitxonline.mit.edu/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-85": {
+      "id": "plat-85",
+      "name": "Stanford Online",
+      "sourceUrl": "https://online.stanford.edu/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-86": {
+      "id": "plat-86",
+      "name": "Harvard Online",
+      "sourceUrl": "https://harvardonline.harvard.edu/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-87": {
+      "id": "plat-87",
+      "name": "Carnegie Mellon OLI",
+      "sourceUrl": "https://oli.cmu.edu/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-88": {
+      "id": "plat-88",
+      "name": "NPTEL",
+      "sourceUrl": "https://nptel.ac.in/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-89": {
+      "id": "plat-89",
+      "name": "SWAYAM",
+      "sourceUrl": "https://www.swayam.gov.in/explorer",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-90": {
+      "id": "plat-90",
+      "name": "MOOC.fi",
+      "sourceUrl": "https://www.mooc.fi/en/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-91": {
+      "id": "plat-91",
+      "name": "OpenLearning",
+      "sourceUrl": "https://www.openlearning.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-92": {
+      "id": "plat-92",
+      "name": "GCFGlobal",
+      "sourceUrl": "https://edu.gcfglobal.org/en/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-93": {
+      "id": "plat-93",
+      "name": "Moodle Academy",
+      "sourceUrl": "https://moodle.academy/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-94": {
+      "id": "plat-94",
+      "name": "FAO eLearning Academy",
+      "sourceUrl": "https://elearning.fao.org/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-95": {
+      "id": "plat-95",
+      "name": "UN CC:e-Learn",
+      "sourceUrl": "https://unccelearn.org/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-96": {
+      "id": "plat-96",
+      "name": "ITCILO eCampus",
+      "sourceUrl": "https://ecampus.itcilo.org/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-97": {
+      "id": "plat-97",
+      "name": "IMF Online Learning",
+      "sourceUrl": "https://www.imf.org/en/capacity-development/online-learning",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-98": {
+      "id": "plat-98",
+      "name": "World Bank Open Learning Campus",
+      "sourceUrl": "https://www.worldbank.org/en/olc",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-99": {
+      "id": "plat-99",
+      "name": "SDG Academy",
+      "sourceUrl": "https://sdgacademy.org/courses/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-100": {
+      "id": "plat-100",
+      "name": "British Council LearnEnglish",
+      "sourceUrl": "https://learnenglish.britishcouncil.org/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-101": {
+      "id": "plat-101",
+      "name": "BBC Learning English",
+      "sourceUrl": "https://www.bbc.co.uk/learningenglish/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-102": {
+      "id": "plat-102",
+      "name": "Duolingo",
+      "sourceUrl": "https://www.duolingo.com/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-103": {
+      "id": "plat-103",
+      "name": "Busuu",
+      "sourceUrl": "https://www.busuu.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-104": {
+      "id": "plat-104",
+      "name": "Babbel",
+      "sourceUrl": "https://www.babbel.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-105": {
+      "id": "plat-105",
+      "name": "Rosetta Stone",
+      "sourceUrl": "https://www.rosettastone.com/buy/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-106": {
+      "id": "plat-106",
+      "name": "Lingoda",
+      "sourceUrl": "https://www.lingoda.com/en/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-107": {
+      "id": "plat-107",
+      "name": "Memrise",
+      "sourceUrl": "https://www.memrise.com/",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-108": {
+      "id": "plat-108",
+      "name": "OpenClassrooms",
+      "sourceUrl": "https://openclassrooms.com/en/courses",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-109": {
+      "id": "plat-109",
+      "name": "Meta Blueprint",
+      "sourceUrl": "https://www.facebookblueprint.com/student/catalog",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    },
+    "plat-110": {
+      "id": "plat-110",
+      "name": "Ahrefs Academy",
+      "sourceUrl": "https://ahrefs.com/academy",
+      "count": 0,
+      "freshCount": 0,
+      "status": "pending",
+      "updatedAt": "2026-08-19T19:30:54.030439+00:00",
+      "error": null
+    }
+  }
+}
