@@ -1,10 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import { extractJsonLdCourses, extractAnchorCourses, parseSitemap, mergeCourseRecords, inferCoursePathPatterns, recordFromUrl } from './catalog-tools.mjs';
+import {
+  extractJsonLdCourses, extractAnchorCourses, parseSitemap, mergeCourseRecords,
+  inferCoursePathPatterns, recordFromUrl, platformFileName, cleanCourseRecords
+} from './catalog-tools.mjs';
 
 const ROOT=path.resolve(path.dirname(new URL(import.meta.url).pathname),'..');
 const CATALOG_DIR=path.join(ROOT,'catalogs');
+const RAW_DIR=path.join(CATALOG_DIR,'raw');
+const CLEAN_DIR=path.join(CATALOG_DIR,'clean');
 const MANIFEST_PATH=path.join(CATALOG_DIR,'manifest.json');
 const TIMEOUT=Number(process.env.CATALOG_TIMEOUT_MS||12000);
 const SITEMAP_LIMIT=Number(process.env.CATALOG_SITEMAP_LIMIT||12);
@@ -23,7 +28,7 @@ function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 async function fetchText(url){
   const ctl=new AbortController(); const timer=setTimeout(()=>ctl.abort(),TIMEOUT);
   try{
-    const r=await fetch(url,{redirect:'follow',signal:ctl.signal,headers:{'user-agent':'DunyaAlDawratCatalogBot/1.0 (+https://devmyskilla.github.io/)','accept':'text/html,application/xml,text/xml;q=0.9,*/*;q=0.7'}});
+    const r=await fetch(url,{redirect:'follow',signal:ctl.signal,headers:{'user-agent':'DunyaAlDawratCatalogBot/2.0 (+https://github.com/devmyskilla/Devmyskilltre)','accept':'text/html,application/xml,text/xml;q=0.9,*/*;q=0.7'}});
     if(!r.ok)throw new Error(`HTTP ${r.status}`);
     return await r.text();
   }finally{clearTimeout(timer);}
@@ -73,8 +78,12 @@ async function sitemapCandidates(platform,patterns){
   return urls;
 }
 async function syncPlatform(platform){
-  const shardPath=path.join(CATALOG_DIR,`${platform.id}.json`);
-  const existing=readJson(shardPath,[]);
+  const fileName=platformFileName(platform.name,platform.id);
+  const rawPath=path.join(RAW_DIR,fileName);
+  const cleanPath=path.join(CLEAN_DIR,fileName);
+  const legacyPath=path.join(CATALOG_DIR,`${platform.id}.json`);
+  const existingRaw=readJson(rawPath,readJson(legacyPath,[]));
+  const existingClean=readJson(cleanPath,cleanCourseRecords(existingRaw,platform));
   const patterns=inferCoursePathPatterns(platform);
   let htmlRows=[], sitemapRows=[], error='';
   try{
@@ -85,22 +94,67 @@ async function syncPlatform(platform){
     const urls=await sitemapCandidates(platform,patterns);
     sitemapRows=urls.map(u=>recordFromUrl(u,platform));
   }catch(e){error=[error,`sitemap: ${e.message}`].filter(Boolean).join('; ');}
-  const fresh=normalizeImported([...htmlRows,...sitemapRows],platform);
-  // Preserve an existing shard when a source temporarily blocks or returns no usable records.
-  const output=fresh.length?fresh:existing;
-  if(fresh.length)writeJson(shardPath,output);
-  return {id:platform.id,name:platform.name,sourceUrl:platform.link,count:output.length,freshCount:fresh.length,status:fresh.length?'updated':existing.length?'preserved':'unavailable',updatedAt:new Date().toISOString(),error:error||null};
+
+  const freshRaw=normalizeImported([...htmlRows,...sitemapRows],platform);
+  const freshClean=cleanCourseRecords(freshRaw,platform).slice(0,URL_LIMIT);
+  const rawOutput=freshRaw.length?freshRaw:existingRaw;
+  const cleanOutput=freshClean.length?freshClean:existingClean;
+
+  // V2 always writes a platform-named file, even when a source is currently unavailable.
+  writeJson(rawPath,rawOutput);
+  writeJson(cleanPath,cleanOutput);
+
+  const status=freshClean.length?'updated':freshRaw.length?'raw-updated':existingClean.length||existingRaw.length?'preserved':'unavailable';
+  return {
+    id:platform.id,
+    name:platform.name,
+    fileName,
+    rawFile:`catalogs/raw/${fileName}`,
+    cleanFile:`catalogs/clean/${fileName}`,
+    sourceUrl:platform.link,
+    count:cleanOutput.length,
+    rawCount:rawOutput.length,
+    cleanCount:cleanOutput.length,
+    freshCount:freshClean.length,
+    freshRawCount:freshRaw.length,
+    freshCleanCount:freshClean.length,
+    status,
+    updatedAt:new Date().toISOString(),
+    error:error||null
+  };
 }
 
-fs.mkdirSync(CATALOG_DIR,{recursive:true});
+fs.mkdirSync(RAW_DIR,{recursive:true});
+fs.mkdirSync(CLEAN_DIR,{recursive:true});
 const previousManifest=readJson(MANIFEST_PATH,{platforms:{}});
 const selected=PLATFORMS_DATA.filter(p=>!onlyId||p.id===onlyId);
 if(!selected.length){console.error(`Unknown platform: ${onlyId}`);process.exit(2);}
-const manifest={generatedAt:new Date().toISOString(),platformCount:PLATFORMS_DATA.length,platforms:{...(previousManifest.platforms||{})}};
+const manifest={
+  schemaVersion:2,
+  generatedAt:new Date().toISOString(),
+  platformCount:PLATFORMS_DATA.length,
+  directories:{raw:'catalogs/raw',clean:'catalogs/clean'},
+  platforms:{...(previousManifest.platforms||{})}
+};
 let i=0;
 for(const platform of selected){
   i++; process.stdout.write(`[${i}/${selected.length}] ${platform.name} ... `);
-  try{const row=await syncPlatform(platform);manifest.platforms[platform.id]=row;console.log(`${row.status} (${row.count})`);}catch(e){manifest.platforms[platform.id]={id:platform.id,name:platform.name,sourceUrl:platform.link,count:0,freshCount:0,status:'error',updatedAt:new Date().toISOString(),error:e.message};console.log(`error: ${e.message}`);}
+  try{
+    const row=await syncPlatform(platform);
+    manifest.platforms[platform.id]=row;
+    console.log(`${row.status} (raw ${row.rawCount} → clean ${row.cleanCount})`);
+  }catch(e){
+    const fileName=platformFileName(platform.name,platform.id);
+    manifest.platforms[platform.id]={
+      id:platform.id,name:platform.name,fileName,
+      rawFile:`catalogs/raw/${fileName}`,cleanFile:`catalogs/clean/${fileName}`,
+      sourceUrl:platform.link,count:0,rawCount:0,cleanCount:0,freshCount:0,freshRawCount:0,freshCleanCount:0,
+      status:'error',updatedAt:new Date().toISOString(),error:e.message
+    };
+    writeJson(path.join(RAW_DIR,fileName),readJson(path.join(RAW_DIR,fileName),[]));
+    writeJson(path.join(CLEAN_DIR,fileName),readJson(path.join(CLEAN_DIR,fileName),[]));
+    console.log(`error: ${e.message}`);
+  }
   await sleep(120);
 }
 writeJson(MANIFEST_PATH,manifest);

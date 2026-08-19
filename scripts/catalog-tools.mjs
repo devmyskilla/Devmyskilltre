@@ -132,3 +132,63 @@ export function inferCoursePathPatterns(platform){
 export function recordFromUrl(url,platform){
   return {title:safeTitleFromUrl(url),sourceUrl:normalizeUrl(url),platform:platform.name,provider:platform.name,recordType:'source-only',lastVerified:new Date().toISOString().slice(0,10)};
 }
+
+export function platformFileName(name,id='platform'){
+  const safe=String(name||'')
+    .normalize('NFKC')
+    .replace(/[\u0000-\u001f\u007f]/g,' ')
+    .replace(/[\\/:*?"<>|%]+/g,' ')
+    .replace(/\s+/g,'-')
+    .replace(/-+/g,'-')
+    .replace(/^[.\-]+|[.\-]+$/g,'')
+    .slice(0,120);
+  return `${safe||String(id||'platform').replace(/[^\p{L}\p{N}._-]+/gu,'-')}.json`;
+}
+
+const GENERIC_TITLES=new Set([
+  'home','course','courses','catalog','catalogue','all courses','all-courses','learn','learning','training',
+  'overview','exam','take exam','quiz','lesson','lessons','module','modules','chapter','chapters','unit','units'
+]);
+const CHILD_SEGMENT=/^(?:lesson|lessons|exam|exams|quiz|quizzes|chapter|chapters|unit|units|lecture|lectures|video|videos|assignment|assignments|topic|topics|overview)(?:[-_].*)?$/i;
+const GENERIC_TITLE_PATTERN=/^(?:lesson|exam|quiz|chapter|unit|lecture|assignment|topic)\b/i;
+
+function normalizedComparableUrl(value){
+  try{const u=new URL(value);u.hash='';u.search='';if(u.pathname.length>1)u.pathname=u.pathname.replace(/\/+$/,'');return u.href.toLowerCase();}
+  catch{return String(value||'').replace(/[?#].*$/,'').replace(/\/+$/,'').toLowerCase();}
+}
+function pathSegments(value){try{return new URL(value).pathname.split('/').filter(Boolean).map(x=>decodeURIComponent(x).toLowerCase())}catch{return[]}}
+function hasBlockedChildSegment(url,platform){
+  const segments=pathSegments(url); if(!segments.length)return false;
+  const patterns=inferCoursePathPatterns(platform);
+  const path='/' + segments.join('/') + '/';
+  for(const pattern of patterns){
+    let p=String(pattern||'').toLowerCase();
+    if(!p.startsWith('/'))continue;
+    if(!p.endsWith('/'))p+='/';
+    const needle=p.replace(/^\/+|\/+$/g,'').split('/').filter(Boolean);
+    if(!needle.length)continue;
+    for(let i=0;i<=segments.length-needle.length;i++){
+      if(!needle.every((part,j)=>segments[i+j]===part))continue;
+      const courseSlugIndex=i+needle.length;
+      if(courseSlugIndex>=segments.length)continue;
+      const children=segments.slice(courseSlugIndex+1);
+      if(children.some(seg=>CHILD_SEGMENT.test(seg)))return true;
+    }
+  }
+  return false;
+}
+
+export function cleanCourseRecords(records,platform={}){
+  const catalogUrl=normalizedComparableUrl(platform.link||'');
+  return mergeCourseRecords(records).filter(row=>{
+    const title=stripTags(row.title||row.name||'').trim();
+    const titleKey=title.toLowerCase().replace(/\s+/g,' ');
+    if(!title||title.length<3)return false;
+    if(GENERIC_TITLES.has(titleKey)||GENERIC_TITLE_PATTERN.test(titleKey))return false;
+    const url=row.sourceUrl||row.url||'';
+    if(!url)return false;
+    if(catalogUrl&&normalizedComparableUrl(url)===catalogUrl)return false;
+    if(hasBlockedChildSegment(url,platform))return false;
+    return true;
+  });
+}
