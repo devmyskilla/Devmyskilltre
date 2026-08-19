@@ -1,4 +1,4 @@
-name: Sync course catalogs
+name: Sync course catalogs V2
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: course-catalog-sync
+  group: course-catalog-sync-v2
   cancel-in-progress: false
 
 jobs:
@@ -23,7 +23,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Sync official catalogs
+      - name: Verify catalog V2 tests
+        run: node --test tests/catalog-tools.test.mjs tests/catalog-v2.test.mjs tests/sync-workflow.test.js tests/sync-workflow-v2.test.js
+      - name: Sync and clean official catalogs
         env:
           CATALOG_TIMEOUT_MS: '15000'
           CATALOG_SITEMAP_LIMIT: '16'
@@ -39,5 +41,5 @@ jobs:
             echo "No catalog changes"
             exit 0
           fi
-          git commit -m "chore: sync course catalogs"
+          git commit -m "chore: sync and clean course catalogs v2"
           git push
