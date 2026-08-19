@@ -1,0 +1,30 @@
+[
+  {
+    "id": "plat-67-catalog-1",
+    "title": "University",
+    "summary": "",
+    "platform": "Redis University",
+    "provider": "Redis University",
+    "sourceUrl": "https://redis.io/try-free/university",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=redis.io&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  },
+  {
+    "id": "plat-67-catalog-2",
+    "title": "University",
+    "summary": "",
+    "platform": "Redis University",
+    "provider": "Redis University",
+    "sourceUrl": "https://redis.io/tutorials/university",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=redis.io&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  }
+]

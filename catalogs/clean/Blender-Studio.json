@@ -1,0 +1,58 @@
+[
+  {
+    "id": "plat-77-catalog-2",
+    "title": "Customizing Material Assets This mini training series introduces the new material assets for Blender 5.2 and goes deeper into customizing them with different simple to advanced shader node techniques shading assets nodes materials procedural Course Intermediate",
+    "summary": "",
+    "platform": "Blender Studio",
+    "provider": "Blender Studio",
+    "sourceUrl": "https://studio.blender.org/training/customizing-material-assets",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=blender.org&sz=128",
+    "recordType": "source-only",
+    "free": false,
+    "certificate": false,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  },
+  {
+    "id": "plat-77-catalog-3",
+    "title": "Advanced Facial Rigging In this course, we are going to cover every method and workflow used to create the fexlible and expressive facial rigging system for Storm, the latest character by Blender Studio. animation rigging characters facial Course Advanced",
+    "summary": "",
+    "platform": "Blender Studio",
+    "provider": "Blender Studio",
+    "sourceUrl": "https://studio.blender.org/training/facial-rigging",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=blender.org&sz=128",
+    "recordType": "source-only",
+    "free": false,
+    "certificate": false,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  },
+  {
+    "id": "plat-77-catalog-4",
+    "title": "3D Printing with Blender This course is an introduction to making stuff in Blender for 3D printing. modeling design 3d-printing Course Beginner",
+    "summary": "",
+    "platform": "Blender Studio",
+    "provider": "Blender Studio",
+    "sourceUrl": "https://studio.blender.org/training/3d-printing",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=blender.org&sz=128",
+    "recordType": "source-only",
+    "free": false,
+    "certificate": false,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  },
+  {
+    "id": "plat-77-catalog-5",
+    "title": "Story Tools",
+    "summary": "",
+    "platform": "Blender Studio",
+    "provider": "Blender Studio",
+    "sourceUrl": "https://studio.blender.org/training/story-tools",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=blender.org&sz=128",
+    "recordType": "source-only",
+    "free": false,
+    "certificate": false,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  }
+]

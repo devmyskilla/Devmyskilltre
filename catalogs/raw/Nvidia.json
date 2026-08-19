@@ -1,0 +1,30 @@
+[
+  {
+    "id": "plat-13-catalog-1",
+    "title": "Self-Paced Courses",
+    "summary": "",
+    "platform": "Nvidia",
+    "provider": "Nvidia",
+    "sourceUrl": "https://www.nvidia.com/en-us/training/self-paced-courses",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=nvidia.com&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": false,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  },
+  {
+    "id": "plat-13-catalog-2",
+    "title": "Self Paced Courses",
+    "summary": "",
+    "platform": "Nvidia",
+    "provider": "Nvidia",
+    "sourceUrl": "https://www.nvidia.com/en-gb/training/self-paced-courses",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=nvidia.com&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": false,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-19"
+  }
+]

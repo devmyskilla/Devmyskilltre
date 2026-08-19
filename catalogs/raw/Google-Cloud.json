@@ -1,0 +1,30 @@
+[
+  {
+    "id": "plat-24-catalog-1",
+    "title": "Explore certificates",
+    "summary": "",
+    "platform": "Google Cloud",
+    "provider": "Google Cloud",
+    "sourceUrl": "https://cloud.google.com/learn/certificates",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=cloud.google.com&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "متعدد اللغات",
+    "lastVerified": "2026-08-19"
+  },
+  {
+    "id": "plat-24-catalog-2",
+    "title": "Explore certifications",
+    "summary": "",
+    "platform": "Google Cloud",
+    "provider": "Google Cloud",
+    "sourceUrl": "https://cloud.google.com/learn/certification",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=cloud.google.com&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "متعدد اللغات",
+    "lastVerified": "2026-08-19"
+  }
+]
