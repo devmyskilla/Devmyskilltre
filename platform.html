@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="description" content="كتالوج منصة تعليمية ضمن دنيا الدورات - تطوير اتحاد شباب الأمة.">
+  <title>دنيا الدورات | كتالوج المنصة</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header"><div class="container nav-inner"><a class="brand" href="index.html#platforms"><span class="brand-mark">د</span><span><strong data-i18n="siteName">دنيا الدورات</strong><small data-i18n="developedBy">تطوير اتحاد شباب الأمة</small></span></a><div class="nav-actions"><button id="themeToggle" class="icon-btn" type="button">◐</button><select id="langSwitcher" class="lang-select"><option value="ar">العربية</option><option value="en">English</option><option value="tr">Türkçe</option></select></div></div></header>
+<main class="detail-main"><div class="container">
+  <a class="back-link" href="index.html#platforms">← <span data-i18n="backToPlatforms">العودة إلى المنصات</span></a>
+  <section class="platform-detail-hero">
+    <div class="platform-detail-logo"><img id="platformLogo" alt=""></div>
+    <div><span class="section-kicker" data-i18n="platformCatalog">كتالوج المنصة</span><h1 id="platformTitle">—</h1><p id="platformDescription" class="detail-summary"></p><div class="platform-meta" id="platformMeta"></div><div class="detail-actions"><a id="officialCatalogLink" class="btn primary" target="_blank" rel="noopener noreferrer"><span data-i18n="officialCatalog">الكتالوج الرسمي</span> ↗</a></div></div>
+  </section>
+  <section class="section platform-local-catalog"><div class="section-heading split"><div><span class="section-kicker" data-i18n="indexedCatalog">المفهرس محليًا</span><h2><strong id="platformCourseCount">0</strong> <span data-i18n="courses">دورة</span></h2></div><p data-i18n="catalogSourceNote">نعرض الدورات التي أمكن فهرستها داخل المشروع. يبقى الكتالوج الرسمي هو المرجع عند تغير المحتوى.</p></div><div class="small-search platform-page-search"><span>⌕</span><input id="platformCourseSearch" type="search" data-i18n-placeholder="courseSearchPlaceholder" placeholder="ابحث داخل هذه المنصة..."></div><div id="platformCoursesGrid" class="courses-grid"></div></section>
+</div></main>
+<footer class="site-footer"><div class="container footer-grid"><div><strong data-i18n="siteName">دنيا الدورات</strong><p data-i18n="footerTagline">دليل ذكي للدورات والمسارات التعليمية</p></div><div class="footer-dev"><span>✦</span><div><small data-i18n="developedBy">تطوير اتحاد شباب الأمة</small><strong>اتحاد شباب الأمة</strong></div></div><p>© 2026</p></div></footer>
+<div id="toast" class="toast"></div>
+<script src="js/i18n.js"></script><script src="js/platforms.js"></script><script src="js/data.js"></script><script src="js/catalog-core.js"></script><script src="js/platform-detail.js"></script>
+</body></html>
