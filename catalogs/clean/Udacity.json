@@ -11,7 +11,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-2",
@@ -25,7 +25,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-3",
@@ -39,7 +39,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-4",
@@ -53,7 +53,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-5",
@@ -67,7 +67,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-6",
@@ -81,7 +81,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-7",
@@ -95,7 +95,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-8",
@@ -109,24 +109,10 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-9",
-    "title": "Agentic AI",
-    "summary": "Go beyond single chatbots to engineer sophisticated, coordinated teams of AI agents. This Nanodegree guides you from advanced prompting techniques like Chain-of-Thought and ReAct to designing agentic workflows with patterns like Routing and Parallelization. You'll master building and orchestrating agents in Python that can reason, plan, and use tools to interact with databases and external APIs. Build a powerful portfolio by tackling hands-on projects, including a multi-agent travel planner, an AI-powered project manager, and a fully automated sales system, to solve real-world problems.",
-    "platform": "Udacity",
-    "provider": "Udacity",
-    "sourceUrl": "https://www.udacity.com/course/agentic-ai--nd900",
-    "thumbnail": "https://www.google.com/s2/favicons?domain=udacity.com&sz=128",
-    "recordType": "source-only",
-    "free": true,
-    "certificate": true,
-    "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
-  },
-  {
-    "id": "plat-58-catalog-10",
     "title": "Business Analytics with Tableau",
     "summary": "Dive into business analytics with this Nanodegree. Master Excel, SQL, and Tableau to analyze data, create interactive dashboards, and deliver insights that drive informed, impactful business decisions.",
     "platform": "Udacity",
@@ -137,7 +123,21 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
+  },
+  {
+    "id": "plat-58-catalog-10",
+    "title": "Agentic AI",
+    "summary": "Go beyond single chatbots to engineer sophisticated, coordinated teams of AI agents. This Nanodegree guides you from advanced prompting techniques like Chain-of-Thought and ReAct to designing agentic workflows with patterns like Routing and Parallelization. You'll master building and orchestrating agents in Python that can reason, plan, and use tools to interact with databases and external APIs. Build a powerful portfolio by tackling hands-on projects, including a multi-agent travel planner, an AI-powered project manager, and a fully automated sales system, to solve real-world problems.",
+    "platform": "Udacity",
+    "provider": "Udacity",
+    "sourceUrl": "https://www.udacity.com/course/agentic-ai--nd900",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=udacity.com&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-11",
@@ -151,7 +151,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-12",
@@ -165,7 +165,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-13",
@@ -179,7 +179,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-14",
@@ -193,7 +193,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-15",
@@ -207,7 +207,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-16",
@@ -221,7 +221,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-17",
@@ -235,7 +235,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-18",
@@ -249,7 +249,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-19",
@@ -263,7 +263,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-20",
@@ -277,7 +277,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-21",
@@ -291,7 +291,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-22",
@@ -305,7 +305,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-23",
@@ -319,7 +319,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   },
   {
     "id": "plat-58-catalog-24",
@@ -333,6 +333,6 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-19"
+    "lastVerified": "2026-08-23"
   }
 ]

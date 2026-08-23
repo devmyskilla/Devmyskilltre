@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-19T20:31:55.328Z",
+  "generatedAt": "2026-08-23T03:16:21.022Z",
   "platformCount": 110,
   "directories": {
     "raw": "catalogs/raw",
@@ -21,7 +21,7 @@
       "freshRawCount": 2092,
       "freshCleanCount": 2092,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:31:56.622Z",
+      "updatedAt": "2026-08-23T03:16:22.409Z",
       "error": null
     },
     "plat-2": {
@@ -38,7 +38,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:31:58.167Z",
+      "updatedAt": "2026-08-23T03:16:23.227Z",
       "error": null
     },
     "plat-3": {
@@ -55,7 +55,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:31:58.977Z",
+      "updatedAt": "2026-08-23T03:16:23.519Z",
       "error": null
     },
     "plat-4": {
@@ -72,7 +72,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:01.592Z",
+      "updatedAt": "2026-08-23T03:16:24.347Z",
       "error": null
     },
     "plat-5": {
@@ -89,7 +89,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:04.675Z",
+      "updatedAt": "2026-08-23T03:16:30.774Z",
       "error": null
     },
     "plat-6": {
@@ -106,7 +106,7 @@
       "freshRawCount": 2386,
       "freshCleanCount": 2386,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:06.858Z",
+      "updatedAt": "2026-08-23T03:16:32.703Z",
       "error": null
     },
     "plat-7": {
@@ -116,14 +116,14 @@
       "rawFile": "catalogs/raw/Edx.json",
       "cleanFile": "catalogs/clean/Edx.json",
       "sourceUrl": "https://www.edx.org/courses",
-      "count": 4182,
-      "rawCount": 4188,
-      "cleanCount": 4182,
-      "freshCount": 4182,
-      "freshRawCount": 4188,
-      "freshCleanCount": 4182,
+      "count": 4994,
+      "rawCount": 5000,
+      "cleanCount": 4994,
+      "freshCount": 4994,
+      "freshRawCount": 5000,
+      "freshCleanCount": 4994,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:07.650Z",
+      "updatedAt": "2026-08-23T03:16:33.426Z",
       "error": null
     },
     "plat-8": {
@@ -140,7 +140,7 @@
       "freshRawCount": 2827,
       "freshCleanCount": 2819,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:10.645Z",
+      "updatedAt": "2026-08-23T03:16:35.425Z",
       "error": null
     },
     "plat-9": {
@@ -157,7 +157,7 @@
       "freshRawCount": 12,
       "freshCleanCount": 12,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:12.103Z",
+      "updatedAt": "2026-08-23T03:16:36.878Z",
       "error": null
     },
     "plat-10": {
@@ -174,7 +174,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:37.943Z",
+      "updatedAt": "2026-08-23T03:16:53.057Z",
       "error": null
     },
     "plat-11": {
@@ -191,7 +191,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:39.328Z",
+      "updatedAt": "2026-08-23T03:16:54.117Z",
       "error": "catalog: HTTP 403"
     },
     "plat-12": {
@@ -208,7 +208,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:40.368Z",
+      "updatedAt": "2026-08-23T03:16:54.638Z",
       "error": null
     },
     "plat-13": {
@@ -225,7 +225,7 @@
       "freshRawCount": 2,
       "freshCleanCount": 1,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:42.791Z",
+      "updatedAt": "2026-08-23T03:16:55.332Z",
       "error": null
     },
     "plat-14": {
@@ -242,7 +242,7 @@
       "freshRawCount": 36,
       "freshCleanCount": 35,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:43.241Z",
+      "updatedAt": "2026-08-23T03:16:55.704Z",
       "error": null
     },
     "plat-15": {
@@ -259,7 +259,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:43.454Z",
+      "updatedAt": "2026-08-23T03:16:55.933Z",
       "error": "catalog: HTTP 403"
     },
     "plat-16": {
@@ -276,7 +276,7 @@
       "freshRawCount": 14,
       "freshCleanCount": 14,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:43.809Z",
+      "updatedAt": "2026-08-23T03:16:56.405Z",
       "error": null
     },
     "plat-17": {
@@ -293,7 +293,7 @@
       "freshRawCount": 40,
       "freshCleanCount": 39,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:44.479Z",
+      "updatedAt": "2026-08-23T03:16:56.712Z",
       "error": null
     },
     "plat-18": {
@@ -310,7 +310,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:46.127Z",
+      "updatedAt": "2026-08-23T03:16:57.825Z",
       "error": null
     },
     "plat-19": {
@@ -327,7 +327,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:46.327Z",
+      "updatedAt": "2026-08-23T03:16:58.082Z",
       "error": "catalog: HTTP 403"
     },
     "plat-20": {
@@ -344,7 +344,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:47.682Z",
+      "updatedAt": "2026-08-23T03:17:00.837Z",
       "error": null
     },
     "plat-21": {
@@ -361,7 +361,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:52.289Z",
+      "updatedAt": "2026-08-23T03:17:04.653Z",
       "error": null
     },
     "plat-22": {
@@ -378,7 +378,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:52.824Z",
+      "updatedAt": "2026-08-23T03:17:05.010Z",
       "error": null
     },
     "plat-23": {
@@ -395,7 +395,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:53.043Z",
+      "updatedAt": "2026-08-23T03:17:05.244Z",
       "error": null
     },
     "plat-24": {
@@ -412,7 +412,7 @@
       "freshRawCount": 2,
       "freshCleanCount": 2,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:54.781Z",
+      "updatedAt": "2026-08-23T03:17:06.801Z",
       "error": null
     },
     "plat-25": {
@@ -429,7 +429,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:32:56.004Z",
+      "updatedAt": "2026-08-23T03:17:07.235Z",
       "error": null
     },
     "plat-26": {
@@ -446,7 +446,7 @@
       "freshRawCount": 5000,
       "freshCleanCount": 4999,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:58.393Z",
+      "updatedAt": "2026-08-23T03:17:08.730Z",
       "error": null
     },
     "plat-27": {
@@ -456,14 +456,14 @@
       "rawFile": "catalogs/raw/Simple-Learn.json",
       "cleanFile": "catalogs/clean/Simple-Learn.json",
       "sourceUrl": "https://www.simplilearn.com/skillup-free-online-courses",
-      "count": 386,
-      "rawCount": 386,
-      "cleanCount": 386,
-      "freshCount": 386,
-      "freshRawCount": 386,
-      "freshCleanCount": 386,
+      "count": 385,
+      "rawCount": 385,
+      "cleanCount": 385,
+      "freshCount": 385,
+      "freshRawCount": 385,
+      "freshCleanCount": 385,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:32:58.963Z",
+      "updatedAt": "2026-08-23T03:17:09.320Z",
       "error": null
     },
     "plat-28": {
@@ -480,7 +480,7 @@
       "freshRawCount": 5000,
       "freshCleanCount": 4999,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:33:00.440Z",
+      "updatedAt": "2026-08-23T03:17:10.224Z",
       "error": null
     },
     "plat-29": {
@@ -497,7 +497,7 @@
       "freshRawCount": 9,
       "freshCleanCount": 0,
       "status": "raw-updated",
-      "updatedAt": "2026-08-19T20:33:01.633Z",
+      "updatedAt": "2026-08-23T03:17:11.110Z",
       "error": null
     },
     "plat-30": {
@@ -514,7 +514,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:33:02.136Z",
+      "updatedAt": "2026-08-23T03:17:11.661Z",
       "error": "catalog: HTTP 403"
     },
     "plat-31": {
@@ -531,7 +531,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:33:03.867Z",
+      "updatedAt": "2026-08-23T03:17:13.179Z",
       "error": null
     },
     "plat-32": {
@@ -548,7 +548,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:33:18.501Z",
+      "updatedAt": "2026-08-23T03:17:25.321Z",
       "error": null
     },
     "plat-33": {
@@ -565,7 +565,7 @@
       "freshRawCount": 1,
       "freshCleanCount": 0,
       "status": "raw-updated",
-      "updatedAt": "2026-08-19T20:33:25.438Z",
+      "updatedAt": "2026-08-23T03:17:29.082Z",
       "error": null
     },
     "plat-34": {
@@ -582,7 +582,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:33:25.635Z",
+      "updatedAt": "2026-08-23T03:17:29.341Z",
       "error": "catalog: HTTP 403"
     },
     "plat-35": {
@@ -599,7 +599,7 @@
       "freshRawCount": 99,
       "freshCleanCount": 92,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:33:29.166Z",
+      "updatedAt": "2026-08-23T03:17:31.191Z",
       "error": null
     },
     "plat-36": {
@@ -616,7 +616,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:33:31.287Z",
+      "updatedAt": "2026-08-23T03:17:33.082Z",
       "error": null
     },
     "plat-37": {
@@ -633,7 +633,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:33:31.918Z",
+      "updatedAt": "2026-08-23T03:17:33.656Z",
       "error": null
     },
     "plat-38": {
@@ -650,7 +650,7 @@
       "freshRawCount": 75,
       "freshCleanCount": 75,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:33:33.202Z",
+      "updatedAt": "2026-08-23T03:17:34.516Z",
       "error": null
     },
     "plat-39": {
@@ -667,7 +667,7 @@
       "freshRawCount": 24,
       "freshCleanCount": 24,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:33:33.941Z",
+      "updatedAt": "2026-08-23T03:17:36.406Z",
       "error": null
     },
     "plat-40": {
@@ -684,7 +684,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:04.097Z",
+      "updatedAt": "2026-08-23T03:18:05.495Z",
       "error": "catalog: fetch failed"
     },
     "plat-41": {
@@ -701,7 +701,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:04.287Z",
+      "updatedAt": "2026-08-23T03:18:05.696Z",
       "error": "catalog: HTTP 403"
     },
     "plat-42": {
@@ -718,7 +718,7 @@
       "freshRawCount": 125,
       "freshCleanCount": 124,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:05.077Z",
+      "updatedAt": "2026-08-23T03:18:06.391Z",
       "error": null
     },
     "plat-43": {
@@ -735,7 +735,7 @@
       "freshRawCount": 5000,
       "freshCleanCount": 5000,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:08.995Z",
+      "updatedAt": "2026-08-23T03:18:10.277Z",
       "error": null
     },
     "plat-44": {
@@ -752,7 +752,7 @@
       "freshRawCount": 5000,
       "freshCleanCount": 5000,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:36.928Z",
+      "updatedAt": "2026-08-23T03:18:55.391Z",
       "error": "catalog: HTTP 403"
     },
     "plat-45": {
@@ -769,7 +769,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:37.292Z",
+      "updatedAt": "2026-08-23T03:18:55.743Z",
       "error": "catalog: HTTP 403"
     },
     "plat-46": {
@@ -786,7 +786,7 @@
       "freshRawCount": 66,
       "freshCleanCount": 65,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:43.101Z",
+      "updatedAt": "2026-08-23T03:19:02.949Z",
       "error": null
     },
     "plat-47": {
@@ -796,14 +796,14 @@
       "rawFile": "catalogs/raw/Educative.json",
       "cleanFile": "catalogs/clean/Educative.json",
       "sourceUrl": "https://www.educative.io/explore",
-      "count": 4746,
+      "count": 4742,
       "rawCount": 5000,
-      "cleanCount": 4746,
-      "freshCount": 4746,
+      "cleanCount": 4742,
+      "freshCount": 4742,
       "freshRawCount": 5000,
-      "freshCleanCount": 4746,
+      "freshCleanCount": 4742,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:45.368Z",
+      "updatedAt": "2026-08-23T03:19:04.646Z",
       "error": null
     },
     "plat-48": {
@@ -820,7 +820,7 @@
       "freshRawCount": 45,
       "freshCleanCount": 44,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:46.725Z",
+      "updatedAt": "2026-08-23T03:19:05.244Z",
       "error": null
     },
     "plat-49": {
@@ -837,7 +837,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:48.530Z",
+      "updatedAt": "2026-08-23T03:19:06.089Z",
       "error": null
     },
     "plat-50": {
@@ -854,7 +854,7 @@
       "freshRawCount": 5000,
       "freshCleanCount": 4925,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:49.485Z",
+      "updatedAt": "2026-08-23T03:19:08.201Z",
       "error": null
     },
     "plat-51": {
@@ -871,7 +871,7 @@
       "freshRawCount": 19,
       "freshCleanCount": 19,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:50.242Z",
+      "updatedAt": "2026-08-23T03:19:08.537Z",
       "error": null
     },
     "plat-52": {
@@ -888,7 +888,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:50.539Z",
+      "updatedAt": "2026-08-23T03:19:08.838Z",
       "error": "catalog: HTTP 403"
     },
     "plat-53": {
@@ -905,7 +905,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:51.280Z",
+      "updatedAt": "2026-08-23T03:19:09.395Z",
       "error": null
     },
     "plat-54": {
@@ -922,7 +922,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:34:51.835Z",
+      "updatedAt": "2026-08-23T03:19:09.764Z",
       "error": "catalog: HTTP 403"
     },
     "plat-55": {
@@ -939,7 +939,7 @@
       "freshRawCount": 34,
       "freshCleanCount": 34,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:53.405Z",
+      "updatedAt": "2026-08-23T03:19:10.480Z",
       "error": "catalog: HTTP 404"
     },
     "plat-56": {
@@ -956,7 +956,7 @@
       "freshRawCount": 134,
       "freshCleanCount": 133,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:54.888Z",
+      "updatedAt": "2026-08-23T03:19:11.597Z",
       "error": null
     },
     "plat-57": {
@@ -973,7 +973,7 @@
       "freshRawCount": 17,
       "freshCleanCount": 16,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:56.636Z",
+      "updatedAt": "2026-08-23T03:19:14.622Z",
       "error": null
     },
     "plat-58": {
@@ -990,7 +990,7 @@
       "freshRawCount": 24,
       "freshCleanCount": 24,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:57.238Z",
+      "updatedAt": "2026-08-23T03:19:15.396Z",
       "error": null
     },
     "plat-59": {
@@ -1007,7 +1007,7 @@
       "freshRawCount": 122,
       "freshCleanCount": 122,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:34:58.802Z",
+      "updatedAt": "2026-08-23T03:19:16.416Z",
       "error": null
     },
     "plat-60": {
@@ -1024,7 +1024,7 @@
       "freshRawCount": 143,
       "freshCleanCount": 143,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:00.098Z",
+      "updatedAt": "2026-08-23T03:19:17.423Z",
       "error": null
     },
     "plat-61": {
@@ -1041,7 +1041,7 @@
       "freshRawCount": 49,
       "freshCleanCount": 49,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:03.156Z",
+      "updatedAt": "2026-08-23T03:19:18.901Z",
       "error": null
     },
     "plat-62": {
@@ -1058,7 +1058,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:04.280Z",
+      "updatedAt": "2026-08-23T03:19:19.526Z",
       "error": null
     },
     "plat-63": {
@@ -1075,7 +1075,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:04.988Z",
+      "updatedAt": "2026-08-23T03:19:20.116Z",
       "error": null
     },
     "plat-64": {
@@ -1092,7 +1092,7 @@
       "freshRawCount": 5000,
       "freshCleanCount": 4993,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:07.502Z",
+      "updatedAt": "2026-08-23T03:19:21.264Z",
       "error": null
     },
     "plat-65": {
@@ -1102,14 +1102,14 @@
       "rawFile": "catalogs/raw/SAP-Learning.json",
       "cleanFile": "catalogs/clean/SAP-Learning.json",
       "sourceUrl": "https://learning.sap.com/",
-      "count": 4729,
-      "rawCount": 4872,
-      "cleanCount": 4729,
-      "freshCount": 4729,
-      "freshRawCount": 4872,
-      "freshCleanCount": 4729,
+      "count": 4831,
+      "rawCount": 4919,
+      "cleanCount": 4831,
+      "freshCount": 4831,
+      "freshRawCount": 4919,
+      "freshCleanCount": 4831,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:09.415Z",
+      "updatedAt": "2026-08-23T03:19:24.653Z",
       "error": null
     },
     "plat-66": {
@@ -1126,7 +1126,7 @@
       "freshRawCount": 199,
       "freshCleanCount": 197,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:11.013Z",
+      "updatedAt": "2026-08-23T03:19:25.439Z",
       "error": null
     },
     "plat-67": {
@@ -1143,7 +1143,7 @@
       "freshRawCount": 2,
       "freshCleanCount": 1,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:16.012Z",
+      "updatedAt": "2026-08-23T03:19:26.751Z",
       "error": null
     },
     "plat-68": {
@@ -1160,7 +1160,7 @@
       "freshRawCount": 79,
       "freshCleanCount": 78,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:23.451Z",
+      "updatedAt": "2026-08-23T03:19:35.021Z",
       "error": null
     },
     "plat-69": {
@@ -1177,7 +1177,7 @@
       "freshRawCount": 59,
       "freshCleanCount": 58,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:23.814Z",
+      "updatedAt": "2026-08-23T03:19:35.800Z",
       "error": null
     },
     "plat-70": {
@@ -1194,7 +1194,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:25.482Z",
+      "updatedAt": "2026-08-23T03:19:36.816Z",
       "error": null
     },
     "plat-71": {
@@ -1211,7 +1211,7 @@
       "freshRawCount": 394,
       "freshCleanCount": 382,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:26.125Z",
+      "updatedAt": "2026-08-23T03:19:37.315Z",
       "error": null
     },
     "plat-72": {
@@ -1228,7 +1228,7 @@
       "freshRawCount": 2195,
       "freshCleanCount": 2195,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:27.550Z",
+      "updatedAt": "2026-08-23T03:19:38.555Z",
       "error": null
     },
     "plat-73": {
@@ -1245,7 +1245,7 @@
       "freshRawCount": 6,
       "freshCleanCount": 6,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:28.035Z",
+      "updatedAt": "2026-08-23T03:19:38.954Z",
       "error": null
     },
     "plat-74": {
@@ -1262,7 +1262,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:28.405Z",
+      "updatedAt": "2026-08-23T03:19:39.235Z",
       "error": null
     },
     "plat-75": {
@@ -1279,7 +1279,7 @@
       "freshRawCount": 919,
       "freshCleanCount": 862,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:30.764Z",
+      "updatedAt": "2026-08-23T03:19:40.514Z",
       "error": null
     },
     "plat-76": {
@@ -1296,7 +1296,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:31.088Z",
+      "updatedAt": "2026-08-23T03:19:40.785Z",
       "error": null
     },
     "plat-77": {
@@ -1313,7 +1313,7 @@
       "freshRawCount": 15,
       "freshCleanCount": 4,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:32.149Z",
+      "updatedAt": "2026-08-23T03:19:41.695Z",
       "error": null
     },
     "plat-78": {
@@ -1330,7 +1330,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:33.575Z",
+      "updatedAt": "2026-08-23T03:19:45.749Z",
       "error": null
     },
     "plat-79": {
@@ -1347,7 +1347,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:36.799Z",
+      "updatedAt": "2026-08-23T03:19:47.821Z",
       "error": "catalog: HTTP 403"
     },
     "plat-80": {
@@ -1364,7 +1364,7 @@
       "freshRawCount": 82,
       "freshCleanCount": 82,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:43.851Z",
+      "updatedAt": "2026-08-23T03:19:54.666Z",
       "error": null
     },
     "plat-81": {
@@ -1381,7 +1381,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "preserved",
-      "updatedAt": "2026-08-19T20:35:44.361Z",
+      "updatedAt": "2026-08-23T03:19:54.966Z",
       "error": "catalog: HTTP 403"
     },
     "plat-82": {
@@ -1398,7 +1398,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:45.107Z",
+      "updatedAt": "2026-08-23T03:19:55.565Z",
       "error": "catalog: HTTP 404"
     },
     "plat-83": {
@@ -1415,7 +1415,7 @@
       "freshRawCount": 1289,
       "freshCleanCount": 1170,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:46.555Z",
+      "updatedAt": "2026-08-23T03:19:55.980Z",
       "error": null
     },
     "plat-84": {
@@ -1425,14 +1425,14 @@
       "rawFile": "catalogs/raw/MITx-Online.json",
       "cleanFile": "catalogs/clean/MITx-Online.json",
       "sourceUrl": "https://mitxonline.mit.edu/",
-      "count": 21,
-      "rawCount": 21,
-      "cleanCount": 21,
-      "freshCount": 21,
-      "freshRawCount": 21,
-      "freshCleanCount": 21,
+      "count": 20,
+      "rawCount": 20,
+      "cleanCount": 20,
+      "freshCount": 20,
+      "freshRawCount": 20,
+      "freshCleanCount": 20,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:47.746Z",
+      "updatedAt": "2026-08-23T03:19:56.362Z",
       "error": null
     },
     "plat-85": {
@@ -1449,7 +1449,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:48.139Z",
+      "updatedAt": "2026-08-23T03:19:57.130Z",
       "error": "catalog: HTTP 403"
     },
     "plat-86": {
@@ -1466,7 +1466,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:48.369Z",
+      "updatedAt": "2026-08-23T03:19:57.495Z",
       "error": "catalog: HTTP 429"
     },
     "plat-87": {
@@ -1483,7 +1483,7 @@
       "freshRawCount": 116,
       "freshCleanCount": 114,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:51.099Z",
+      "updatedAt": "2026-08-23T03:19:59.057Z",
       "error": null
     },
     "plat-88": {
@@ -1500,7 +1500,7 @@
       "freshRawCount": 3485,
       "freshCleanCount": 3485,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:35:53.379Z",
+      "updatedAt": "2026-08-23T03:20:02.630Z",
       "error": null
     },
     "plat-89": {
@@ -1517,7 +1517,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:35:56.076Z",
+      "updatedAt": "2026-08-23T03:20:07.004Z",
       "error": "catalog: fetch failed"
     },
     "plat-90": {
@@ -1534,7 +1534,7 @@
       "freshRawCount": 1,
       "freshCleanCount": 0,
       "status": "raw-updated",
-      "updatedAt": "2026-08-19T20:35:58.107Z",
+      "updatedAt": "2026-08-23T03:20:08.470Z",
       "error": null
     },
     "plat-91": {
@@ -1551,7 +1551,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:00.171Z",
+      "updatedAt": "2026-08-23T03:20:10.680Z",
       "error": null
     },
     "plat-92": {
@@ -1568,7 +1568,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:01.711Z",
+      "updatedAt": "2026-08-23T03:20:12.552Z",
       "error": null
     },
     "plat-93": {
@@ -1585,7 +1585,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:04.397Z",
+      "updatedAt": "2026-08-23T03:20:14.296Z",
       "error": "catalog: HTTP 403"
     },
     "plat-94": {
@@ -1602,7 +1602,7 @@
       "freshRawCount": 17,
       "freshCleanCount": 16,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:36:06.537Z",
+      "updatedAt": "2026-08-23T03:20:16.071Z",
       "error": null
     },
     "plat-95": {
@@ -1619,7 +1619,7 @@
       "freshRawCount": 178,
       "freshCleanCount": 144,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:36:08.885Z",
+      "updatedAt": "2026-08-23T03:20:17.739Z",
       "error": null
     },
     "plat-96": {
@@ -1636,7 +1636,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:10.414Z",
+      "updatedAt": "2026-08-23T03:20:18.804Z",
       "error": null
     },
     "plat-97": {
@@ -1653,7 +1653,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:28.661Z",
+      "updatedAt": "2026-08-23T03:20:35.148Z",
       "error": "catalog: HTTP 403"
     },
     "plat-98": {
@@ -1670,7 +1670,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:29.714Z",
+      "updatedAt": "2026-08-23T03:20:35.990Z",
       "error": null
     },
     "plat-99": {
@@ -1687,7 +1687,7 @@
       "freshRawCount": 79,
       "freshCleanCount": 77,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:36:31.213Z",
+      "updatedAt": "2026-08-23T03:20:38.459Z",
       "error": null
     },
     "plat-100": {
@@ -1704,7 +1704,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:31.615Z",
+      "updatedAt": "2026-08-23T03:20:38.783Z",
       "error": "catalog: HTTP 403"
     },
     "plat-101": {
@@ -1721,7 +1721,7 @@
       "freshRawCount": 53,
       "freshCleanCount": 44,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:36:35.394Z",
+      "updatedAt": "2026-08-23T03:20:41.888Z",
       "error": null
     },
     "plat-102": {
@@ -1738,7 +1738,7 @@
       "freshRawCount": 41,
       "freshCleanCount": 41,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:36:36.338Z",
+      "updatedAt": "2026-08-23T03:20:42.497Z",
       "error": null
     },
     "plat-103": {
@@ -1748,14 +1748,14 @@
       "rawFile": "catalogs/raw/Busuu.json",
       "cleanFile": "catalogs/clean/Busuu.json",
       "sourceUrl": "https://www.busuu.com/",
-      "count": 166,
-      "rawCount": 166,
-      "cleanCount": 166,
-      "freshCount": 166,
-      "freshRawCount": 166,
-      "freshCleanCount": 166,
+      "count": 179,
+      "rawCount": 179,
+      "cleanCount": 179,
+      "freshCount": 179,
+      "freshRawCount": 179,
+      "freshCleanCount": 179,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:36:56.384Z",
+      "updatedAt": "2026-08-23T03:20:45.831Z",
       "error": null
     },
     "plat-104": {
@@ -1772,7 +1772,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:57.282Z",
+      "updatedAt": "2026-08-23T03:20:46.838Z",
       "error": null
     },
     "plat-105": {
@@ -1789,7 +1789,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:36:59.218Z",
+      "updatedAt": "2026-08-23T03:20:47.744Z",
       "error": null
     },
     "plat-106": {
@@ -1806,7 +1806,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:37:02.409Z",
+      "updatedAt": "2026-08-23T03:20:48.025Z",
       "error": null
     },
     "plat-107": {
@@ -1823,7 +1823,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:37:08.936Z",
+      "updatedAt": "2026-08-23T03:20:53.593Z",
       "error": null
     },
     "plat-108": {
@@ -1840,7 +1840,7 @@
       "freshRawCount": 0,
       "freshCleanCount": 0,
       "status": "unavailable",
-      "updatedAt": "2026-08-19T20:37:10.388Z",
+      "updatedAt": "2026-08-23T03:20:54.260Z",
       "error": null
     },
     "plat-109": {
@@ -1850,14 +1850,14 @@
       "rawFile": "catalogs/raw/Meta-Blueprint.json",
       "cleanFile": "catalogs/clean/Meta-Blueprint.json",
       "sourceUrl": "https://www.facebookblueprint.com/student/catalog",
-      "count": 4575,
-      "rawCount": 4575,
-      "cleanCount": 4575,
-      "freshCount": 4575,
-      "freshRawCount": 4575,
-      "freshCleanCount": 4575,
+      "count": 12,
+      "rawCount": 12,
+      "cleanCount": 12,
+      "freshCount": 12,
+      "freshRawCount": 12,
+      "freshCleanCount": 12,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:37:15.920Z",
+      "updatedAt": "2026-08-23T03:21:10.560Z",
       "error": null
     },
     "plat-110": {
@@ -1874,7 +1874,7 @@
       "freshRawCount": 391,
       "freshCleanCount": 222,
       "status": "updated",
-      "updatedAt": "2026-08-19T20:37:17.576Z",
+      "updatedAt": "2026-08-23T03:21:11.627Z",
       "error": null
     }
   }
