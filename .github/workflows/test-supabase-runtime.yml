@@ -12,6 +12,7 @@ on:
       - 'platform.html'
       - 'sw.js'
       - 'tests/supabase-runtime.test.js'
+      - 'tests/theme-storage.test.js'
       - '.github/workflows/test-supabase-runtime.yml'
 
 permissions:
@@ -27,6 +28,8 @@ jobs:
           node-version: '22'
       - name: Supabase runtime tests
         run: node --test tests/supabase-runtime.test.js
+      - name: Homepage theme regression test
+        run: node --test tests/theme-storage.test.js
       - name: Existing live catalog regression tests
         run: node --test tests/live-catalog-runtime.test.js
       - name: JavaScript syntax checks
