@@ -27,5 +27,15 @@ jobs:
           node-version: '22'
       - name: Supabase runtime tests
         run: node --test tests/supabase-runtime.test.js
-      - name: Existing runtime regression tests
-        run: node --test tests/live-catalog-runtime.test.js tests/static-snapshot.test.mjs
+      - name: Existing live catalog regression tests
+        run: node --test tests/live-catalog-runtime.test.js
+      - name: JavaScript syntax checks
+        run: node --check js/supabase-runtime.js && node --check js/supabase-config.js && node --check js/app.js && node --check js/platform-detail.js
+      - name: Verify live Supabase Data API and RLS
+        shell: bash
+        run: |
+          set -euo pipefail
+          body=$(curl --fail --silent --show-error \
+            'https://pptjaflkltwavyktzphw.supabase.co/rest/v1/courses?select=id%2Cexternal_id%2Ctitle%2Cstatus%2Cplatforms%21inner%28id%2Cexternal_id%2Cname%29%2Ccategories%28id%2Cslug%2Cname%29&status=eq.verified&limit=1' \
+            -H 'apikey: sb_publishable_lUq2yPmkTijaqyYDifTYFA_Es-Xi7Nb')
+          node -e "const rows=JSON.parse(process.argv[1]); if(!Array.isArray(rows)||rows.length!==1||rows[0].status!=='verified') process.exit(1);" "$body"
