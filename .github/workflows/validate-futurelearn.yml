@@ -50,4 +50,4 @@ jobs:
           git commit -m "chore: validate FutureLearn courses one by one"
           git push
 
-# diagnostic-red: missing-catalog-url helpers
+# diagnostic-green: exact database coverage gaps
