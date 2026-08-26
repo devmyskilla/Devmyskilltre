@@ -11,6 +11,15 @@
       "verifiedAt": "2026-08-26",
       "evidence": "Official catalogue displays: Explore 1672 courses",
       "status": "verified"
+    },
+    "plat-2": {
+      "name": "Agora",
+      "officialCourseCount": null,
+      "indexedRecordCount": 0,
+      "sourceUrl": "https://agora.unicef.org/local/catalogue/",
+      "verifiedAt": "2026-08-26",
+      "evidence": "Official catalogue requires JavaScript and does not expose an exact public course total in the rendered HTML; UNICEF describes over a thousand learning opportunities, which are not all courses.",
+      "status": "exact-count-not-publicly-exposed"
     }
   }
 }
