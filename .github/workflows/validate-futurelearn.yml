@@ -5,6 +5,10 @@ on:
   push:
     paths:
       - '.github/workflows/validate-futurelearn.yml'
+      - 'scripts/course-validator.mjs'
+      - 'scripts/validate-platform-courses.mjs'
+      - 'scripts/sync-futurelearn-images.mjs'
+      - 'tests/course-validator.test.mjs'
 
 permissions:
   contents: write
