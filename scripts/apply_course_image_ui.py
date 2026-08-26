@@ -66,7 +66,7 @@ def patch_css():
 .course-card .card-top:has(.course-logo.course-photo) .card-top-actions,.course-card .card-top:has(.course-logo.course-photo) .editorial-score{position:relative;z-index:2}
 '''
     if '.course-logo.course-photo{' not in text:
-        text=text.rstrip()+block+'\n'
+        text=text.rstrip()+block.rstrip()+'\n'
     path.write_text(text,encoding='utf-8')
 
 
