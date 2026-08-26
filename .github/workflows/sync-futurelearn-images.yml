@@ -1,0 +1,47 @@
+name: Sync FutureLearn official images
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/futurelearn-images.mjs'
+      - 'tests/futurelearn-images.test.mjs'
+      - '.github/workflows/sync-futurelearn-images.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-futurelearn-official-images
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test image mapping logic
+        run: node --test tests/futurelearn-images.test.mjs
+      - name: Build official FutureLearn image map
+        env:
+          FUTURELEARN_IMAGE_CONCURRENCY: '2'
+          FUTURELEARN_IMAGE_MAX_PAGES: '115'
+        run: node scripts/futurelearn-images.mjs
+      - name: Validate image map
+        run: node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('catalogs/validation/plat-1-images.json'));if(!d.count||d.count<1000)throw new Error('too few official images: '+(d.count||0));if(d.records.some(x=>!/^https:\/\/ugc\.futurelearn\.com\//.test(x.imageUrl)))throw new Error('non-official image found');console.log('official images',d.count);"
+      - name: Commit official image map
+        shell: bash
+        run: |
+          git config user.name "dunya-image-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add catalogs/validation/plat-1-images.json
+          if git diff --cached --quiet; then
+            echo "No image changes"
+            exit 0
+          fi
+          git commit -m "data: sync official FutureLearn course images"
+          git push
