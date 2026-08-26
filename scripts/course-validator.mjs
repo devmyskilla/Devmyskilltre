@@ -7,6 +7,74 @@ export function canonicalCourseUrl(value){
   }catch{return ''}
 }
 
+function decodeHtml(value){
+  return String(value||'')
+    .replace(/&amp;/gi,'&')
+    .replace(/&quot;/gi,'"')
+    .replace(/&#39;|&apos;/gi,"'")
+    .replace(/&lt;/gi,'<')
+    .replace(/&gt;/gi,'>');
+}
+
+function tagAttributes(tag){
+  const out={};
+  for(const m of String(tag||'').matchAll(/([:\w-]+)\s*=\s*(["'])([\s\S]*?)\2/g)){
+    out[m[1].toLowerCase()]=decodeHtml(m[3]).trim();
+  }
+  return out;
+}
+
+function absoluteImageUrl(value,pageUrl){
+  if(!value)return '';
+  try{
+    const u=new URL(decodeHtml(value),pageUrl||'https://www.futurelearn.com');
+    if(!/^https?:$/.test(u.protocol))return '';
+    return u.href;
+  }catch{return ''}
+}
+
+function jsonLdImage(value){
+  if(typeof value==='string')return value;
+  if(Array.isArray(value)){
+    for(const item of value){const found=jsonLdImage(item);if(found)return found;}
+    return '';
+  }
+  if(value&&typeof value==='object'){
+    if(value.url)return jsonLdImage(value.url);
+    if(value.contentUrl)return jsonLdImage(value.contentUrl);
+  }
+  return '';
+}
+
+export function extractOfficialCourseImage(html,pageUrl='https://www.futurelearn.com'){
+  const metas=[];
+  for(const m of String(html||'').matchAll(/<meta\b[^>]*>/gi)){
+    const attrs=tagAttributes(m[0]);
+    const key=String(attrs.property||attrs.name||'').toLowerCase();
+    const content=attrs.content||'';
+    if(key&&content)metas.push({key,content});
+  }
+  for(const key of ['og:image:secure_url','og:image','twitter:image']){
+    const match=metas.find(meta=>meta.key===key);
+    const url=absoluteImageUrl(match?.content,pageUrl);
+    if(url)return url;
+  }
+  for(const m of String(html||'').matchAll(/<script\b[^>]*type\s*=\s*(["'])application\/ld\+json\1[^>]*>([\s\S]*?)<\/script>/gi)){
+    try{
+      const data=JSON.parse(decodeHtml(m[2]).trim());
+      const nodes=Array.isArray(data)?data:[data];
+      for(const node of nodes){
+        const candidates=node?.['@graph']&&Array.isArray(node['@graph'])?[node,...node['@graph']]:[node];
+        for(const candidate of candidates){
+          const url=absoluteImageUrl(jsonLdImage(candidate?.image),pageUrl);
+          if(url)return url;
+        }
+      }
+    }catch{}
+  }
+  return '';
+}
+
 export function extractOfficialCourseCount(html){
   const m=String(html||'').match(/Explore\s+([\d,]+)\s+courses/i);
   return m?Number(m[1].replace(/,/g,'')):null;
