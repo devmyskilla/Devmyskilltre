@@ -16,7 +16,7 @@ on:
       - '.github/workflows/test-supabase-runtime.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
@@ -26,6 +26,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Repair legacy homepage theme key
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('js/app.js')
+          text = path.read_text(encoding='utf-8')
+          old = 'localStorage.getItem(STORAGE_THEME)'
+          new = 'localStorage.getItem(STORAGE.theme)'
+          if old in text:
+              text = text.replace(old, new, 1)
+              path.write_text(text, encoding='utf-8')
+          if old in path.read_text(encoding='utf-8'):
+              raise SystemExit('legacy STORAGE_THEME reference still exists')
+          PY
       - name: Supabase runtime tests
         run: node --test tests/supabase-runtime.test.js
       - name: Homepage theme regression test
@@ -42,3 +57,15 @@ jobs:
             'https://pptjaflkltwavyktzphw.supabase.co/rest/v1/courses?select=id%2Cexternal_id%2Ctitle%2Cstatus%2Cplatforms%21inner%28id%2Cexternal_id%2Cname%29%2Ccategories%28id%2Cslug%2Cname%29&status=eq.verified&limit=1' \
             -H 'apikey: sb_publishable_lUq2yPmkTijaqyYDifTYFA_Es-Xi7Nb')
           node -e "const rows=JSON.parse(process.argv[1]); if(!Array.isArray(rows)||rows.length!==1||rows[0].status!=='verified') process.exit(1);" "$body"
+      - name: Commit verified theme repair
+        shell: bash
+        run: |
+          git config user.name "dunya-catalog-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/app.js
+          if git diff --cached --quiet; then
+            echo "No theme repair needed"
+            exit 0
+          fi
+          git commit -m "fix: use defined theme storage key"
+          git push
