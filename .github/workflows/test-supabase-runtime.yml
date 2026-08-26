@@ -12,6 +12,7 @@ on:
       - 'platform.html'
       - 'sw.js'
       - 'tests/supabase-runtime.test.js'
+      - 'tests/supabase-platforms.test.js'
       - 'tests/theme-storage.test.js'
       - '.github/workflows/test-supabase-runtime.yml'
 
@@ -43,6 +44,8 @@ jobs:
           PY
       - name: Supabase runtime tests
         run: node --test tests/supabase-runtime.test.js
+      - name: Active platform Supabase tests
+        run: node --test tests/supabase-platforms.test.js
       - name: Homepage theme regression test
         run: node --test tests/theme-storage.test.js
       - name: Existing live catalog regression tests
