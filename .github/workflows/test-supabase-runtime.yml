@@ -8,12 +8,14 @@ on:
       - 'js/supabase-*.js'
       - 'js/app.js'
       - 'js/platform-detail.js'
+      - 'css/style.css'
       - 'index.html'
       - 'platform.html'
       - 'sw.js'
       - 'tests/supabase-runtime.test.js'
       - 'tests/supabase-platforms.test.js'
       - 'tests/theme-storage.test.js'
+      - 'tests/course-image-ui.test.js'
       - '.github/workflows/test-supabase-runtime.yml'
 
 permissions:
@@ -46,6 +48,8 @@ jobs:
         run: node --test tests/supabase-runtime.test.js
       - name: Active platform Supabase tests
         run: node --test tests/supabase-platforms.test.js
+      - name: Official course image UI tests
+        run: node --test tests/course-image-ui.test.js
       - name: Homepage theme regression test
         run: node --test tests/theme-storage.test.js
       - name: Existing live catalog regression tests
