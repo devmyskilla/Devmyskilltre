@@ -6,6 +6,7 @@ import {
   classifyCourseResponse,
   extractCatalogCourseUrls,
   extractOfficialCourseCount,
+  extractOfficialCourseImage,
   findMissingCatalogUrls,
   sampleStatuses
 } from './course-validator.mjs';
@@ -102,11 +103,11 @@ async function validate(){
     const row=rows[i];
     const canonical=canonicalCourseUrl(row.sourceUrl||row.url||'');
     if(!canonical||!validFutureLearnCourseUrl(canonical)){
-      results[i]={id:row.id||null,title:row.title||'',sourceUrl:row.sourceUrl||row.url||'',canonicalUrl:canonical||null,status:'invalid-source-url',pageExists:false,joinable:false,listedInCatalog:false,httpStatus:0,duplicateOf:null};
+      results[i]={id:row.id||null,title:row.title||'',sourceUrl:row.sourceUrl||row.url||'',canonicalUrl:canonical||null,officialImageUrl:'',status:'invalid-source-url',pageExists:false,joinable:false,listedInCatalog:false,httpStatus:0,duplicateOf:null};
       continue;
     }
     if(seen.has(canonical)){
-      results[i]={id:row.id||null,title:row.title||'',sourceUrl:row.sourceUrl||row.url||'',canonicalUrl:canonical,status:'duplicate',pageExists:null,joinable:null,listedInCatalog:catalog.urls.has(canonical),httpStatus:null,duplicateOf:seen.get(canonical)};
+      results[i]={id:row.id||null,title:row.title||'',sourceUrl:row.sourceUrl||row.url||'',canonicalUrl:canonical,officialImageUrl:'',status:'duplicate',pageExists:null,joinable:null,listedInCatalog:catalog.urls.has(canonical),httpStatus:null,duplicateOf:seen.get(canonical)};
       continue;
     }
     seen.set(canonical,row.id||`row-${i+1}`);
@@ -127,6 +128,7 @@ async function validate(){
         sourceUrl:row.sourceUrl||row.url||'',
         canonicalUrl:canonical,
         officialTitle:extractH1(response.html),
+        officialImageUrl:extractOfficialCourseImage(response.html,response.url||canonical),
         ...classified,
         error:response.error||null,
         duplicateOf:null
@@ -140,8 +142,9 @@ async function validate(){
   const databaseUrls=new Set(seen.keys());
   const missingFromDatabase=findMissingCatalogUrls(catalog.urls,databaseUrls);
   const listedDatabaseUrls=[...databaseUrls].filter(url=>catalog.urls.has(url));
+  const officialImageCount=results.filter(r=>r?.officialImageUrl).length;
   const report={
-    schemaVersion:2,
+    schemaVersion:3,
     platformId,
     platform:platform.name,
     databaseFile:`catalogs/${platformId}.json`,
@@ -151,6 +154,7 @@ async function validate(){
     officialHeadlineCount:catalog.officialHeadlineCount,
     observedCatalogCourseUrlCount:catalog.urls.size,
     listedDatabaseCourseUrlCount:listedDatabaseUrls.length,
+    officialImageCount,
     missingFromDatabaseCount:missingFromDatabase.length,
     missingFromDatabase,
     summary:summarize(results),
@@ -161,6 +165,7 @@ async function validate(){
   const out=path.join(ROOT,'catalogs','validation',`${platformId}.json`);
   writeJson(out,report);
   console.log(`Report written: ${path.relative(ROOT,out)}`);
+  console.log(`Official course images extracted: ${officialImageCount}`);
   console.log(`Current catalogue URLs missing from database: ${missingFromDatabase.length}`);
   console.log(JSON.stringify(report.summary,null,2));
 }
