@@ -20,6 +20,15 @@
       "verifiedAt": "2026-08-26",
       "evidence": "Official catalogue requires JavaScript and does not expose an exact public course total in the rendered HTML; UNICEF describes over a thousand learning opportunities, which are not all courses.",
       "status": "exact-count-not-publicly-exposed"
+    },
+    "plat-3": {
+      "name": "IBM Skills Build",
+      "officialCourseCount": null,
+      "indexedRecordCount": 0,
+      "sourceUrl": "https://skillsbuild.org/learning-catalog/university-catalog",
+      "verifiedAt": "2026-08-26",
+      "evidence": "Official catalogue exposes exact counts for individual filters (for example 75 AI courses) but no exact unfiltered university-course total was publicly exposed, so category counts were not summed because overlap cannot be ruled out.",
+      "status": "exact-count-not-publicly-exposed"
     }
   }
 }
