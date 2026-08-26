@@ -1,0 +1,31 @@
+name: Test Supabase catalog runtime
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'js/supabase-*.js'
+      - 'js/app.js'
+      - 'js/platform-detail.js'
+      - 'index.html'
+      - 'platform.html'
+      - 'sw.js'
+      - 'tests/supabase-runtime.test.js'
+      - '.github/workflows/test-supabase-runtime.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Supabase runtime tests
+        run: node --test tests/supabase-runtime.test.js
+      - name: Existing runtime regression tests
+        run: node --test tests/live-catalog-runtime.test.js tests/static-snapshot.test.mjs
