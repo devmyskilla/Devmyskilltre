@@ -25,6 +25,21 @@ export function extractCatalogCourseUrls(html){
   return out;
 }
 
+export function findMissingCatalogUrls(catalogUrls,databaseUrls){
+  const db=databaseUrls instanceof Set?databaseUrls:new Set(databaseUrls||[]);
+  return [...(catalogUrls||[])].filter(url=>!db.has(url)).sort();
+}
+
+export function sampleStatuses(results,limit=5){
+  const out={};
+  for(const result of results||[]){
+    const key=result?.status||'unknown';
+    if(!out[key])out[key]=[];
+    if(out[key].length<limit)out[key].push(result);
+  }
+  return out;
+}
+
 function joinable(html){
   return /\b(join course|join now|join today|join with limited access|available now|start learning today)\b/i.test(String(html||''));
 }
