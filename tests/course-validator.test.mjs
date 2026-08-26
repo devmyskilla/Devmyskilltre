@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canonicalCourseUrl, classifyCourseResponse, extractCatalogCourseUrls, extractOfficialCourseCount } from '../scripts/course-validator.mjs';
+import {
+  canonicalCourseUrl,
+  classifyCourseResponse,
+  extractCatalogCourseUrls,
+  extractOfficialCourseCount,
+  findMissingCatalogUrls,
+  sampleStatuses
+} from '../scripts/course-validator.mjs';
 
 test('canonicalCourseUrl strips query/hash/trailing slash', () => {
   assert.equal(canonicalCourseUrl('https://www.futurelearn.com/courses/test-course/?utm_source=x#top'), 'https://www.futurelearn.com/courses/test-course');
@@ -21,6 +28,31 @@ test('extractCatalogCourseUrls only returns unique FutureLearn course detail URL
     'https://www.futurelearn.com/courses/alpha',
     'https://www.futurelearn.com/courses/beta'
   ]);
+});
+
+test('findMissingCatalogUrls returns current catalogue URLs absent from database', () => {
+  assert.deepEqual(findMissingCatalogUrls(
+    new Set([
+      'https://www.futurelearn.com/courses/alpha',
+      'https://www.futurelearn.com/courses/beta',
+      'https://www.futurelearn.com/courses/gamma'
+    ]),
+    new Set([
+      'https://www.futurelearn.com/courses/alpha',
+      'https://www.futurelearn.com/courses/gamma'
+    ])
+  ), ['https://www.futurelearn.com/courses/beta']);
+});
+
+test('sampleStatuses groups a limited sample for each validation status', () => {
+  const samples=sampleStatuses([
+    {id:'1',status:'active-listed'},
+    {id:'2',status:'not-course-page'},
+    {id:'3',status:'not-course-page'},
+    {id:'4',status:'not-course-page'}
+  ],2);
+  assert.deepEqual(samples['active-listed'].map(x=>x.id),['1']);
+  assert.deepEqual(samples['not-course-page'].map(x=>x.id),['2','3']);
 });
 
 test('classifyCourseResponse marks active listed course', () => {
