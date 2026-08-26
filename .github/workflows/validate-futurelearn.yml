@@ -1,0 +1,51 @@
+name: Validate FutureLearn course database
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/validate-futurelearn.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: validate-futurelearn-course-database
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test validation logic
+        run: node --test tests/course-validator.test.mjs
+
+      - name: Validate every FutureLearn database course
+        env:
+          VALIDATION_TIMEOUT_MS: '15000'
+          VALIDATION_CONCURRENCY: '6'
+          VALIDATION_REQUEST_DELAY_MS: '120'
+          VALIDATION_MAX_CATALOG_PAGES: '150'
+        run: node scripts/validate-platform-courses.mjs --platform=plat-1
+
+      - name: Commit validation report
+        shell: bash
+        run: |
+          git config user.name "dunya-validation-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add catalogs/validation/plat-1.json
+          if git diff --cached --quiet; then
+            echo "No validation changes"
+            exit 0
+          fi
+          git commit -m "chore: validate FutureLearn courses one by one"
+          git push
