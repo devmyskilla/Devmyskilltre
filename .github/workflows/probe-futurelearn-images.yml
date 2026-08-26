@@ -1,0 +1,27 @@
+name: Probe FutureLearn course images
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/probe-futurelearn-images.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch one FutureLearn catalog page through Reader
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 60 \
+            'https://r.jina.ai/https://www.futurelearn.com/courses?page=1' \
+            -o /tmp/page.md
+          echo '--- course/image lines ---'
+          grep -E -m 30 'futurelearn\.com/courses/|ugc\.futurelearn\.com' /tmp/page.md || true
+          echo '--- first 120 lines ---'
+          sed -n '1,120p' /tmp/page.md
