@@ -29,6 +29,26 @@
       "verifiedAt": "2026-08-26",
       "evidence": "Official catalogue exposes exact counts for individual filters (for example 75 AI courses) but no exact unfiltered university-course total was publicly exposed, so category counts were not summed because overlap cannot be ruled out.",
       "status": "exact-count-not-publicly-exposed"
+    },
+    "plat-4": {
+      "name": "Forage",
+      "officialCourseCount": null,
+      "officialCatalogCount": 286,
+      "officialUnit": "job simulations",
+      "indexedRecordCount": 0,
+      "sourceUrl": "https://www.theforage.com/simulations",
+      "verifiedAt": "2026-08-26",
+      "evidence": "Official catalogue displays: Displaying 1 - 16 of 286 Job Simulations. Forage uses job simulations rather than courses as its primary catalogue unit.",
+      "status": "verified-primary-unit"
+    },
+    "plat-5": {
+      "name": "Microsoft",
+      "officialCourseCount": 144,
+      "indexedRecordCount": 0,
+      "sourceUrl": "https://learn.microsoft.com/en-us/training/browse/?resource_type=course",
+      "verifiedAt": "2026-08-26",
+      "evidence": "Microsoft Learn course-only catalogue displays 144 results.",
+      "status": "verified"
     }
   }
 }
