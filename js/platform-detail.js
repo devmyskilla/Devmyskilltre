@@ -1,7 +1,7 @@
 const $=id=>document.getElementById(id);
 const STORAGE_THEME='dunya.theme';
 const PLATFORM_PAGE_SIZE=60;
-let platform=null, platformCourses=[], visiblePlatformLimit=PLATFORM_PAGE_SIZE, searchTimer=null;
+let platform=null, platformCourses=[], visiblePlatformLimit=PLATFORM_PAGE_SIZE, searchTimer=null, platformDataSource='supabase';
 
 function esc(v){return String(v??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));}
 function key(v){return CourseCatalog.normalizeText(v).replace(/\s+/g,'');}
@@ -9,7 +9,7 @@ function localizedPlatform(p){if(currentLang==='en')return p.description_en||p.d
 function matchesPlatform(course,p){const k=key(p.name);return [course.platform,course.provider].filter(Boolean).some(v=>{const x=key(v);return x===k||x.includes(k)||k.includes(x)});}
 function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem(STORAGE_THEME,theme)}catch(_){};$('themeToggle').textContent=theme==='dark'?'☀':'◐';}
 function initTheme(){let saved;try{saved=localStorage.getItem(STORAGE_THEME)}catch(_){};const preferred=matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light';setTheme(saved||preferred);}
-function courseCard(c){const title=(currentLang==='ar'&&c.title_ar)||(currentLang==='tr'&&c.title_tr)||c.title||c.name||'Course';const summary=(currentLang==='ar'&&c.summary_ar)||(currentLang==='tr'&&c.summary_tr)||c.summary||'';const url=c.sourceUrl||c.url||'#';const rich=!!COURSES_DATA.find(x=>x.id===c.id);return `<article class="course-card"><div class="card-top"><div class="course-logo"><img src="${esc(c.thumbnail||platform.thumbnail||'icon.svg')}" alt="" loading="lazy"></div><span class="editorial-score">${c.editorialScore?Number(c.editorialScore).toFixed(1):'↗'}</span></div><div class="card-body"><div class="provider-line"><span>${esc(c.provider||platform.name)}</span><small>${esc(c.platform||platform.name)}</small></div><h3>${esc(title)}</h3><p class="card-summary">${esc(summary||getText('sourceOnlyCourse'))}</p><div class="card-footer"><span>${c.free?'✓ '+getText('free'):''}</span>${rich?`<a class="details-link" href="course.html?id=${encodeURIComponent(c.id)}&lang=${encodeURIComponent(currentLang)}">${getText('details')} ↗</a>`:`<a class="details-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${getText('openOfficial')} ↗</a>`}</div></div></article>`;}
+function courseCard(c){const title=(currentLang==='ar'&&c.title_ar)||(currentLang==='tr'&&c.title_tr)||c.title||c.name||'Course';const summary=(currentLang==='ar'&&c.summary_ar)||(currentLang==='tr'&&c.summary_tr)||c.summary||'';const url=c.sourceUrl||c.url||'#';const rich=!c.catalogOnly&&!!COURSES_DATA.find(x=>x.id===c.id);return `<article class="course-card"><div class="card-top"><div class="course-logo"><img src="${esc(c.thumbnail||platform.thumbnail||'icon.svg')}" alt="" loading="lazy"></div><span class="editorial-score">${c.editorialScore?Number(c.editorialScore).toFixed(1):'↗'}</span></div><div class="card-body"><div class="provider-line"><span>${esc(c.provider||platform.name)}</span><small>${esc(c.platform||platform.name)}</small></div><h3>${esc(title)}</h3><p class="card-summary">${esc(summary||getText('sourceOnlyCourse'))}</p><div class="card-footer"><span>${c.free?'✓ '+getText('free'):''}</span>${rich?`<a class="details-link" href="course.html?id=${encodeURIComponent(c.id)}&lang=${encodeURIComponent(currentLang)}">${getText('details')} ↗</a>`:`<a class="details-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${getText('openOfficial')} ↗</a>`}</div></div></article>`;}
 
 async function loadManifest(){try{const r=await fetch('catalogs/manifest.json',{cache:'default'});if(!r.ok)return null;return await r.json();}catch(_){return null;}}
 async function fetchRows(target){const r=await fetch(encodeURI(target),{cache:'default'});if(!r.ok)return[];const data=await r.json();return Array.isArray(data)?data:(Array.isArray(data?.courses)?data.courses:[]);}
@@ -38,14 +38,32 @@ function renderCourses(){
     more.querySelector('button').onclick=()=>{visiblePlatformLimit+=PLATFORM_PAGE_SIZE;renderCourses();};
   }
 }
-function renderPlatform(){document.title=`${platform.name} | ${getText('siteName')}`;$('platformLogo').src=platform.thumbnail||'icon.svg';$('platformTitle').textContent=platform.name;$('platformDescription').textContent=localizedPlatform(platform);$('officialCatalogLink').href=platform.link;$('platformMeta').innerHTML=`<span>${platform.free?'✓ '+getText('free'):getText('paid')}</span>${platform.certificate?`<span>🎓 ${getText('certificate')}</span>`:''}<span>🌐 ${esc(platform.language||'')}</span>`;renderCourses();}
+function sourceCopy(){
+  if(platformDataSource==='supabase'){
+    if(currentLang==='en')return ['Verified database catalog','Only verified courses stored in Supabase are shown here.'];
+    if(currentLang==='tr')return ['Doğrulanmış veritabanı kataloğu','Burada yalnızca Supabase içinde doğrulanmış kurslar gösterilir.'];
+    return ['الكتالوج الموثق في قاعدة البيانات','نعرض هنا فقط الدورات الموثقة والمحفوظة في قاعدة بيانات Supabase.'];
+  }
+  if(currentLang==='en')return ['Local fallback catalog','Supabase could not be reached, so a local JSON fallback is being shown.'];
+  if(currentLang==='tr')return ['Yerel yedek katalog','Supabase erişilemediği için yerel JSON yedeği gösteriliyor.'];
+  return ['نسخة احتياطية محلية','تعذر الوصول إلى Supabase، لذلك نعرض نسخة JSON احتياطية محلية.'];
+}
+function renderPlatform(){document.title=`${platform.name} | ${getText('siteName')}`;$('platformLogo').src=platform.thumbnail||'icon.svg';$('platformTitle').textContent=platform.name;$('platformDescription').textContent=localizedPlatform(platform);$('officialCatalogLink').href=platform.link;$('platformMeta').innerHTML=`<span>${platform.free?'✓ '+getText('free'):getText('paid')}</span>${platform.certificate?`<span>🎓 ${getText('certificate')}</span>`:''}<span>🌐 ${esc(platform.language||'')}</span>`;const [kicker,note]=sourceCopy();const kickerEl=document.querySelector('[data-i18n="indexedCatalog"]');const noteEl=document.querySelector('[data-i18n="catalogSourceNote"]');if(kickerEl)kickerEl.textContent=kicker;if(noteEl)noteEl.textContent=note;renderCourses();}
 async function init(){
   const params=new URLSearchParams(location.search);setLang(params.get('lang')||currentLang);initTheme();applyTranslations();$('langSwitcher').value=currentLang;
   platform=PLATFORMS_DATA.find(p=>p.id===params.get('id'))||PLATFORMS_DATA.find(p=>p.id==='plat-1');
-  const curated=COURSES_DATA.filter(c=>matchesPlatform(c,platform));
-  const manifest=await loadManifest();
-  const shard=await loadShard(platform.id,manifest);
-  platformCourses=prepareSearch(dedupe([...curated,...shard]));
+  try{
+    if(typeof SupabaseRuntime==='undefined'||typeof SUPABASE_CONFIG==='undefined')throw new Error('Supabase runtime/config missing');
+    platformCourses=prepareSearch(dedupe(await SupabaseRuntime.loadPlatformVerified({...SUPABASE_CONFIG,externalId:platform.id,pageSize:1000,maxRows:20000})));
+    platformDataSource='supabase';
+  }catch(err){
+    console.warn('Supabase platform load failed; using JSON fallback',err);
+    platformDataSource='fallback';
+    const curated=COURSES_DATA.filter(c=>matchesPlatform(c,platform));
+    const manifest=await loadManifest();
+    const shard=await loadShard(platform.id,manifest);
+    platformCourses=prepareSearch(dedupe([...curated,...shard]));
+  }
   renderPlatform();
   $('platformCourseSearch').addEventListener('input',()=>{clearTimeout(searchTimer);visiblePlatformLimit=PLATFORM_PAGE_SIZE;searchTimer=setTimeout(renderCourses,160);});
   $('langSwitcher').onchange=e=>{setLang(e.target.value);applyTranslations();visiblePlatformLimit=PLATFORM_PAGE_SIZE;renderPlatform()};
