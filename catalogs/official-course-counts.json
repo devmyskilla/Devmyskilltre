@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-26",
+  "scope": "Official course counts verified from each platform's official public catalogue",
+  "platforms": {
+    "plat-1": {
+      "name": "FutureLearn",
+      "officialCourseCount": 1672,
+      "indexedRecordCount": 2092,
+      "sourceUrl": "https://www.futurelearn.com/courses",
+      "verifiedAt": "2026-08-26",
+      "evidence": "Official catalogue displays: Explore 1672 courses",
+      "status": "verified"
+    }
+  }
+}
