@@ -22,7 +22,7 @@ function favorites(){ return setFromStorage(STORAGE.favorites); }
 function compareSet(){ return setFromStorage(STORAGE.compare); }
 
 function setTheme(theme){ document.documentElement.dataset.theme=theme; try{localStorage.setItem(STORAGE.theme,theme)}catch(_){} if($('themeToggle')) $('themeToggle').textContent=theme==='dark'?'☀':'◐'; }
-function initTheme(){ let saved; try{saved=localStorage.getItem(STORAGE_THEME)}catch(_){} const preferred=matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light'; setTheme(saved||preferred); }
+function initTheme(){ let saved; try{saved=localStorage.getItem(STORAGE.theme)}catch(_){} const preferred=matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light'; setTheme(saved||preferred); }
 
 function renderStats(){
   const s=CourseCatalog.getCatalogStats(PLATFORMS_DATA,COURSES_DATA);
