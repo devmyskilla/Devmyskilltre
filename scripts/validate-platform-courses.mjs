@@ -5,7 +5,9 @@ import {
   canonicalCourseUrl,
   classifyCourseResponse,
   extractCatalogCourseUrls,
-  extractOfficialCourseCount
+  extractOfficialCourseCount,
+  findMissingCatalogUrls,
+  sampleStatuses
 } from './course-validator.mjs';
 
 const ROOT=path.resolve(path.dirname(new URL(import.meta.url).pathname),'..');
@@ -135,8 +137,11 @@ async function validate(){
   }
   await Promise.all(Array.from({length:Math.min(CONCURRENCY,pending.length||1)},()=>worker()));
 
+  const databaseUrls=new Set(seen.keys());
+  const missingFromDatabase=findMissingCatalogUrls(catalog.urls,databaseUrls);
+  const listedDatabaseUrls=[...databaseUrls].filter(url=>catalog.urls.has(url));
   const report={
-    schemaVersion:1,
+    schemaVersion:2,
     platformId,
     platform:platform.name,
     databaseFile:`catalogs/${platformId}.json`,
@@ -145,13 +150,18 @@ async function validate(){
     uniqueDatabaseCourseUrlCount:seen.size,
     officialHeadlineCount:catalog.officialHeadlineCount,
     observedCatalogCourseUrlCount:catalog.urls.size,
+    listedDatabaseCourseUrlCount:listedDatabaseUrls.length,
+    missingFromDatabaseCount:missingFromDatabase.length,
+    missingFromDatabase,
     summary:summarize(results),
+    samplesByStatus:sampleStatuses(results,5),
     catalogPages:catalog.pageSummaries,
     records:results
   };
   const out=path.join(ROOT,'catalogs','validation',`${platformId}.json`);
   writeJson(out,report);
   console.log(`Report written: ${path.relative(ROOT,out)}`);
+  console.log(`Current catalogue URLs missing from database: ${missingFromDatabase.length}`);
   console.log(JSON.stringify(report.summary,null,2));
 }
 
