@@ -5,6 +5,7 @@ import {
   classifyCourseResponse,
   extractCatalogCourseUrls,
   extractOfficialCourseCount,
+  extractOfficialCourseImage,
   findMissingCatalogUrls,
   sampleStatuses
 } from '../scripts/course-validator.mjs';
@@ -15,6 +16,32 @@ test('canonicalCourseUrl strips query/hash/trailing slash', () => {
 
 test('extractOfficialCourseCount reads Explore count', () => {
   assert.equal(extractOfficialCourseCount('<h2>Explore 1,688 courses</h2>'), 1688);
+});
+
+test('extractOfficialCourseImage prefers official og:image regardless of attribute order', () => {
+  const html=`
+    <meta content="https://ugc.futurelearn.com/uploads/images/course.jpg?width=800&amp;height=450" property="og:image">
+    <meta name="twitter:image" content="https://ugc.futurelearn.com/uploads/images/twitter.jpg">`;
+  assert.equal(
+    extractOfficialCourseImage(html,'https://www.futurelearn.com/courses/alpha'),
+    'https://ugc.futurelearn.com/uploads/images/course.jpg?width=800&height=450'
+  );
+});
+
+test('extractOfficialCourseImage falls back to twitter:image and resolves relative URLs', () => {
+  const html='<meta content="/images/course-card.jpg" name="twitter:image">';
+  assert.equal(
+    extractOfficialCourseImage(html,'https://www.futurelearn.com/courses/alpha'),
+    'https://www.futurelearn.com/images/course-card.jpg'
+  );
+});
+
+test('extractOfficialCourseImage falls back to JSON-LD image', () => {
+  const html='<script type="application/ld+json">{"@type":"Course","image":["https://ugc.futurelearn.com/uploads/images/jsonld.jpg"]}</script>';
+  assert.equal(
+    extractOfficialCourseImage(html,'https://www.futurelearn.com/courses/alpha'),
+    'https://ugc.futurelearn.com/uploads/images/jsonld.jpg'
+  );
 });
 
 test('extractCatalogCourseUrls only returns unique FutureLearn course detail URLs', () => {
