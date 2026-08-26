@@ -6,7 +6,9 @@ let deferredInstallPrompt = null;
 let catalogManifest = null;
 let runtimePlatformCounts = {};
 let visibleCourseLimit = 60;
+let supabaseCatalogLoaded = false;
 const COURSE_PAGE_SIZE = 60;
+const CURATED_COURSES_DATA = Array.isArray(COURSES_DATA) ? COURSES_DATA.slice() : [];
 
 function readJSON(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) ?? fallback; }catch(_){ return fallback; } }
 function writeJSON(key, value){ try{ localStorage.setItem(key, JSON.stringify(value)); }catch(_){} }
@@ -20,10 +22,16 @@ function favorites(){ return setFromStorage(STORAGE.favorites); }
 function compareSet(){ return setFromStorage(STORAGE.compare); }
 
 function setTheme(theme){ document.documentElement.dataset.theme=theme; try{localStorage.setItem(STORAGE.theme,theme)}catch(_){} if($('themeToggle')) $('themeToggle').textContent=theme==='dark'?'☀':'◐'; }
-function initTheme(){ let saved; try{saved=localStorage.getItem(STORAGE.theme)}catch(_){} const preferred=matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light'; setTheme(saved||preferred); }
+function initTheme(){ let saved; try{saved=localStorage.getItem(STORAGE_THEME)}catch(_){} const preferred=matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light'; setTheme(saved||preferred); }
 
-function renderStats(){ const s=CourseCatalog.getCatalogStats(PLATFORMS_DATA,COURSES_DATA); const total=catalogManifest?CatalogRuntime.manifestTotal(catalogManifest):s.courses; $('statCourses').textContent=Math.max(total,s.courses); $('statPlatforms').textContent=catalogManifest?.platformCount||s.platforms; $('statFree').textContent=s.free; $('statCert').textContent=s.certificates; }
-
+function renderStats(){
+  const s=CourseCatalog.getCatalogStats(PLATFORMS_DATA,COURSES_DATA);
+  const total=supabaseCatalogLoaded?s.courses:(catalogManifest?CatalogRuntime.manifestTotal(catalogManifest):s.courses);
+  $('statCourses').textContent=total;
+  $('statPlatforms').textContent=supabaseCatalogLoaded?PLATFORMS_DATA.length:(catalogManifest?.platformCount||s.platforms);
+  $('statFree').textContent=s.free;
+  $('statCert').textContent=s.certificates;
+}
 
 function platformText(platform, field='description'){
   if(currentLang==='en') return platform[field+'_en']||platform[field]||'';
@@ -34,6 +42,7 @@ function platformMatchKey(value){ return CourseCatalog.normalizeText(value).repl
 function indexedCoursesForPlatform(platform){
   const key=platformMatchKey(platform.name);
   return COURSES_DATA.filter(course=>{
+    if(course.platformId&&course.platformId===platform.id) return true;
     const values=[course.platform,course.provider].filter(Boolean).map(platformMatchKey);
     return values.some(v=>v===key||v.includes(key)||key.includes(v));
   });
@@ -45,8 +54,10 @@ function renderPlatforms(){
   $('platformResultsCount').textContent=list.length;
   grid.innerHTML=list.map(platform=>{
     const indexed=indexedCoursesForPlatform(platform);
-    const meta=catalogManifest?.platforms?.[platform.id];
-    const indexedCount=Math.max(Number(meta?.cleanCount??meta?.count??0),Number(runtimePlatformCounts[platform.id]||0),indexed.length);
+    const meta=supabaseCatalogLoaded?null:catalogManifest?.platforms?.[platform.id];
+    const indexedCount=supabaseCatalogLoaded
+      ? Math.max(Number(runtimePlatformCounts[platform.id]||0),indexed.length)
+      : Math.max(Number(meta?.cleanCount??meta?.count??0),Number(runtimePlatformCounts[platform.id]||0),indexed.length);
     const desc=platformText(platform);
     return `<article class="platform-card">
       <div class="platform-card-head"><img src="${escapeHtml(platform.thumbnail||'icon.svg')}" alt="" loading="lazy"><div><h3>${escapeHtml(platform.name)}</h3><small>${escapeHtml(platform.category||'')}</small></div></div>
@@ -120,16 +131,16 @@ function toggleCompare(id){ const set=compareSet(); if(set.has(id)) set.delete(i
 function updateCompareDock(){ const set=compareSet(), courses=[...set].map(id=>COURSES_DATA.find(c=>c.id===id)).filter(Boolean); $('compareCount').textContent=`${courses.length}/3`; $('compareNames').textContent=courses.map(c=>courseField(c,'title')).join(' · '); $('compareDock').classList.toggle('show',courses.length>0); }
 
 function buildCompare(){ const selected=[...compareSet()].map(id=>COURSES_DATA.find(c=>c.id===id)).filter(Boolean); if(!selected.length){showToast(getText('compareCourses'));return;} const rows=[
-  [getText('platform'),c=>c.platform],[getText('category'),c=>categoryLabel(c.category)],[getText('level'),c=>levelLabel(c.level)],[getText('duration'),c=>durationText(c)],[getText('free'),c=>c.free?'✓ '+getText('free'):'— '+getText('paid')],[getText('certificate'),c=>c.certificate?'✓ '+getText('certificate'):'—'],[getText('score'),c=>c.editorialScore.toFixed(1)+'/10'],[getText('skills'),c=>c.skills.slice(0,5).join(', ')]
+  [getText('platform'),c=>c.platform],[getText('category'),c=>categoryLabel(c.category)],[getText('level'),c=>levelLabel(c.level)],[getText('duration'),c=>durationText(c)],[getText('free'),c=>c.free?'✓ '+getText('free'):'— '+getText('paid')],[getText('certificate'),c=>c.certificate?'✓ '+getText('certificate'):'—'],[getText('score'),c=>Number(c.editorialScore||0).toFixed(1)+'/10'],[getText('skills'),c=>(c.skills||[]).slice(0,5).join(', ')]
   ]; $('compareTable').innerHTML=`<table class="compare-table"><thead><tr><th></th>${selected.map(c=>`<th><img src="${escapeHtml(c.thumbnail)}" alt=""><strong>${escapeHtml(courseField(c,'title'))}</strong></th>`).join('')}</tr></thead><tbody>${rows.map(([label,fn])=>`<tr><th>${escapeHtml(label)}</th>${selected.map(c=>`<td>${escapeHtml(fn(c))}</td>`).join('')}</tr>`).join('')}</tbody></table>`; openModal('compareModal'); }
 
 function openModal(id){ const m=$(id); if(!m)return;m.classList.add('open');document.body.classList.add('modal-open'); }
 function closeModal(id){ const m=$(id);if(!m)return;m.classList.remove('open'); if(!document.querySelector('.modal.open'))document.body.classList.remove('modal-open'); }
 
 function buildQuiz(){ const cats=categoryEntries(); $('quizForm').innerHTML=`<div class="quiz-grid"><label><span>${getText('goalCategory')}</span><select id="quizCategory">${option('',getText('any'))}${cats.map(c=>option(c.key,categoryLabel(c.key))).join('')}</select></label><label><span>${getText('preferredLevel')}</span><select id="quizLevel">${option('',getText('any'))}${['beginner','intermediate','advanced'].map(v=>option(v,levelLabel(v))).join('')}</select></label><label><span>${getText('needFree')}</span><select id="quizFree">${option('',getText('any'))}${option('yes',getText('freeOnly'))}</select></label><label><span>${getText('needCertificate')}</span><select id="quizCert">${option('',getText('any'))}${option('yes',getText('certificateOnly'))}</select></label></div><button id="runQuiz" class="btn primary full" type="button">✨ ${getText('showRecommendations')}</button>`; $('quizResults').innerHTML=''; $('runQuiz').onclick=runQuiz; }
-function runQuiz(){ const profile={category:$('quizCategory').value,level:$('quizLevel').value,freeOnly:$('quizFree').value==='yes',certificateOnly:$('quizCert').value==='yes'}; const ranked=COURSES_DATA.filter(c=>!c.catalogOnly).map(c=>({course:c,score:CourseCatalog.scoreCourseMatch(c,profile)})).sort((a,b)=>b.score-a.score).slice(0,4); const min=Math.min(...ranked.map(x=>x.score)),max=Math.max(...ranked.map(x=>x.score)); $('quizResults').innerHTML=`<div class="quiz-results">${ranked.map((x,i)=>{const pct=max===min?95:Math.round(72+(x.score-min)/(max-min)*26);return `<a class="match-row" href="${detailUrl(x.course)}"><span class="rank">${i+1}</span><img src="${escapeHtml(x.course.thumbnail)}" alt=""><div><strong>${escapeHtml(courseField(x.course,'title'))}</strong><small>${escapeHtml(categoryLabel(x.course.category))} · ${escapeHtml(durationText(x.course))}</small></div><b>${pct}%<small>${getText('match')}</small></b></a>`}).join('')}</div>`; }
+function runQuiz(){ const profile={category:$('quizCategory').value,level:$('quizLevel').value,freeOnly:$('quizFree').value==='yes',certificateOnly:$('quizCert').value==='yes'}; const ranked=CURATED_COURSES_DATA.map(c=>({course:c,score:CourseCatalog.scoreCourseMatch(c,profile)})).sort((a,b)=>b.score-a.score).slice(0,4); const min=Math.min(...ranked.map(x=>x.score)),max=Math.max(...ranked.map(x=>x.score)); $('quizResults').innerHTML=`<div class="quiz-results">${ranked.map((x,i)=>{const pct=max===min?95:Math.round(72+(x.score-min)/(max-min)*26);return `<a class="match-row" href="${detailUrl(x.course)}"><span class="rank">${i+1}</span><img src="${escapeHtml(x.course.thumbnail)}" alt=""><div><strong>${escapeHtml(courseField(x.course,'title'))}</strong><small>${escapeHtml(categoryLabel(x.course.category))} · ${escapeHtml(durationText(x.course))}</small></div><b>${pct}%<small>${getText('match')}</small></b></a>`}).join('')}</div>`; }
 
-function showPath(pathId){ const path=LEARNING_PATHS.find(p=>p.id===pathId); if(!path)return; const title=currentLang==='ar'?path.title_ar:currentLang==='tr'?(path.title_tr||path.title):path.title; $('pathDetail').innerHTML=`<span class="section-kicker">${path.icon||'🧭'} ${getText('pathCourses')}</span><h2>${escapeHtml(title)}</h2><div class="learning-path">${path.stages.map((stage,index)=>{const st=currentLang==='ar'?stage.title_ar:stage.title; const items=stage.courseIds.map(id=>COURSES_DATA.find(c=>c.id===id)).filter(Boolean);return `<div class="path-stage"><div class="stage-number">${index+1}</div><div><small>${getText('nextStep')} ${index+1}</small><h3>${escapeHtml(st)}</h3><div class="courses-grid compact">${items.map(c=>cardHtml(c,true)).join('')}</div></div></div>`}).join('')}</div>`; openModal('pathModal'); }
+function showPath(pathId){ const path=LEARNING_PATHS.find(p=>p.id===pathId); if(!path)return; const title=currentLang==='ar'?path.title_ar:currentLang==='tr'?(path.title_tr||path.title):path.title; $('pathDetail').innerHTML=`<span class="section-kicker">${path.icon||'🧭'} ${getText('pathCourses')}</span><h2>${escapeHtml(title)}</h2><div class="learning-path">${path.stages.map((stage,index)=>{const st=currentLang==='ar'?stage.title_ar:stage.title; const items=stage.courseIds.map(id=>CURATED_COURSES_DATA.find(c=>c.id===id)).filter(Boolean);return `<div class="path-stage"><div class="stage-number">${index+1}</div><div><small>${getText('nextStep')} ${index+1}</small><h3>${escapeHtml(st)}</h3><div class="courses-grid compact">${items.map(c=>cardHtml(c,true)).join('')}</div></div></div>`}).join('')}</div>`; openModal('pathModal'); }
 
 async function shareCourse(id){ const course=COURSES_DATA.find(c=>c.id===id); if(!course)return; const url=course.catalogOnly?(course.sourceUrl||course.url):new URL(detailUrl(course),location.href).href; try{ if(navigator.share) await navigator.share({title:courseField(course,'title'),text:courseField(course,'summary'),url}); else {await navigator.clipboard.writeText(url);showToast(getText('copied'));} }catch(_){} }
 
@@ -144,10 +155,9 @@ function bindEvents(){
   $('categoryChips').addEventListener('click',e=>{const btn=e.target.closest('[data-category]');if(!btn)return;activeCategory=btn.dataset.category;$('filterCategory').value=activeCategory;renderCourses();document.getElementById('catalog').scrollIntoView({behavior:'smooth'});});
   document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{activeTab=btn.dataset.tab;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));renderCourses()});
   document.addEventListener('click',e=>{const a=e.target.closest('[data-action]'); if(a){e.preventDefault();const id=a.dataset.id;if(a.dataset.action==='favorite')toggleFavorite(id);if(a.dataset.action==='compare')toggleCompare(id);if(a.dataset.action==='share')shareCourse(id);} const close=e.target.closest('[data-close]');if(close)closeModal(close.dataset.close);const path=e.target.closest('[data-open-path]');if(path)showPath(path.dataset.openPath);const platformBtn=e.target.closest('[data-platform-courses]');if(platformBtn)openIndexedPlatform(platformBtn.dataset.platformCourses);if(e.target.classList.contains('modal'))closeModal(e.target.id);});
-  $('clearCompare').onclick=()=>{writeJSON(STORAGE.compare,[]);renderCourses()}; $('compareNow').onclick=buildCompare; $('heroQuizBtn').onclick=()=>{buildQuiz();openModal('quizModal')}; $('randomBtn').onclick=()=>{const list=getVisibleCourses().length?getVisibleCourses():COURSES_DATA;const c=list[Math.floor(Math.random()*list.length)];if(c.catalogOnly&&c.sourceUrl)window.open(c.sourceUrl,'_blank','noopener');else location.href=detailUrl(c)};
+  $('clearCompare').onclick=()=>{writeJSON(STORAGE.compare,[]);renderCourses()}; $('compareNow').onclick=buildCompare; $('heroQuizBtn').onclick=()=>{buildQuiz();openModal('quizModal')}; $('randomBtn').onclick=()=>{const list=getVisibleCourses().length?getVisibleCourses():COURSES_DATA;const c=list[Math.floor(Math.random()*list.length)];if(!c)return;if(c.catalogOnly&&c.sourceUrl)window.open(c.sourceUrl,'_blank','noopener');else location.href=detailUrl(c)};
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$('searchInput').focus()}if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id));});
 }
-
 
 async function loadCatalogManifest(){
   try{
@@ -158,12 +168,42 @@ async function loadCatalogManifest(){
     if($('catalogLoadStatus')){
       const total=CatalogRuntime.manifestTotal(catalogManifest).toLocaleString();
       $('catalogLoadStatus').textContent=currentLang==='ar'
-        ? `يتوفر ${total} دورة عبر ${catalogManifest.platformCount||PLATFORMS_DATA.length} منصة. تُحمّل بيانات كل منصة عند فتحها حتى يبقى الموقع سريعًا.`
+        ? `تعذر الاتصال بقاعدة البيانات؛ نعرض نسخة احتياطية محلية تحتوي ${total} سجلًا.`
         : currentLang==='tr'
-          ? `${total} kurs mevcut. Siteyi hızlı tutmak için her platformun verileri yalnızca açıldığında yüklenir.`
-          : `${total} courses are available. Each platform catalog loads only when opened to keep the site fast.`;
+          ? `Veritabanına ulaşılamadı; ${total} kayıt içeren yerel yedek gösteriliyor.`
+          : `Database unavailable; showing a local fallback with ${total} records.`;
     }
   }catch(err){console.warn('Catalog manifest load failed',err);}
 }
 
-document.addEventListener('DOMContentLoaded',()=>{ const lang=new URLSearchParams(location.search).get('lang'); setLang(lang||currentLang); initTheme(); applyTranslations(); $('langSwitcher').value=currentLang; renderStats(); populateFilters(); renderCategoryChips(); renderPaths(); renderCourses(); renderPlatforms(); bindEvents(); registerPWA(); loadCatalogManifest(); });
+async function loadSupabaseCatalog(){
+  try{
+    if(typeof SupabaseRuntime==='undefined'||typeof SUPABASE_CONFIG==='undefined') throw new Error('Supabase runtime/config missing');
+    const rows=await SupabaseRuntime.loadAllVerified({...SUPABASE_CONFIG,pageSize:1000,maxRows:50000});
+    COURSES_DATA=rows;
+    supabaseCatalogLoaded=true;
+    catalogManifest=null;
+    runtimePlatformCounts={};
+    for(const course of COURSES_DATA){if(course.platformId)runtimePlatformCounts[course.platformId]=(runtimePlatformCounts[course.platformId]||0)+1;}
+    visibleCourseLimit=COURSE_PAGE_SIZE;
+    populateFilters();
+    renderStats();
+    renderCourses();
+    renderPlatforms();
+    buildQuiz();
+    if($('catalogLoadStatus')){
+      const total=COURSES_DATA.length.toLocaleString();
+      $('catalogLoadStatus').textContent=currentLang==='ar'
+        ? `يعرض الموقع الآن ${total} دورة موثقة مباشرة من قاعدة بيانات Supabase.`
+        : currentLang==='tr'
+          ? `Site şu anda Supabase veritabanından doğrulanmış ${total} kurs gösteriyor.`
+          : `Showing ${total} verified courses directly from the Supabase database.`;
+    }
+  }catch(err){
+    console.warn('Supabase catalog load failed; using JSON fallback',err);
+    supabaseCatalogLoaded=false;
+    await loadCatalogManifest();
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{ const lang=new URLSearchParams(location.search).get('lang'); setLang(lang||currentLang); initTheme(); applyTranslations(); $('langSwitcher').value=currentLang; renderStats(); populateFilters(); renderCategoryChips(); renderPaths(); renderCourses(); renderPlatforms(); bindEvents(); registerPWA(); loadSupabaseCatalog(); });
