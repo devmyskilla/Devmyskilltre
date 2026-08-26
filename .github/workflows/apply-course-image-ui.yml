@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/apply-course-image-ui.yml'
+      - 'scripts/apply_course_image_ui.py'
 
 permissions:
   contents: write
@@ -17,74 +18,22 @@ jobs:
         with:
           node-version: '22'
       - name: Apply focused UI changes
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          app=Path('js/app.js')
-          text=app.read_text(encoding='utf-8')
-          marker="function durationText(course){ return localizedValue(course.durationLabel)||getText('unknownDuration'); }"
-          helper="""function isOfficialCoursePhoto(course){ return /^https:\\/\\/ugc\\.futurelearn\\.com\\//i.test(String(course?.thumbnail||'')); }\nfunction courseImageClass(course){ return `course-logo${isOfficialCoursePhoto(course)?' course-photo':''}`; }"""
-          if helper not in text:
-              if marker not in text: raise SystemExit('app duration marker not found')
-              text=text.replace(marker,marker+'\n'+helper,1)
-          old='<div class="course-logo"><img src="${escapeHtml(course.thumbnail||\'icon.svg\')}" alt="" loading="lazy"></div>'
-          new='<div class="${courseImageClass(course)}"><img src="${escapeHtml(course.thumbnail||\'icon.svg\')}" alt="" loading="lazy"></div>'
-          if old in text: text=text.replace(old,new,1)
-          elif new not in text: raise SystemExit('app card image markup not found')
-          error_listener="""\ndocument.addEventListener('error',event=>{const img=event.target;if(!(img instanceof HTMLImageElement)||!img.closest('.course-logo')||img.dataset.fallback==='1')return;img.dataset.fallback='1';img.closest('.course-logo')?.classList.remove('course-photo');img.src='icon.svg';},true);\n"""
-          dom_marker="document.addEventListener('DOMContentLoaded'"
-          if error_listener.strip() not in text:
-              idx=text.find(dom_marker)
-              if idx<0: raise SystemExit('app DOMContentLoaded marker not found')
-              text=text[:idx]+error_listener+text[idx:]
-          app.write_text(text,encoding='utf-8')
-
-          detail=Path('js/platform-detail.js')
-          text=detail.read_text(encoding='utf-8')
-          marker="function setTheme(theme){document.documentElement.dataset.theme=theme;"
-          helper="function isOfficialCoursePhoto(course){return /^https:\\/\\/ugc\\.futurelearn\\.com\\//i.test(String(course?.thumbnail||''));}\nfunction courseImageClass(course){return `course-logo${isOfficialCoursePhoto(course)?' course-photo':''}`;}\n"
-          if helper not in text:
-              idx=text.find(marker)
-              if idx<0: raise SystemExit('platform detail theme marker not found')
-              text=text[:idx]+helper+text[idx:]
-          old='<div class="course-logo"><img src="${esc(c.thumbnail||platform.thumbnail||\'icon.svg\')}" alt="" loading="lazy"></div>'
-          new='<div class="${courseImageClass(c)}"><img src="${esc(c.thumbnail||platform.thumbnail||\'icon.svg\')}" alt="" loading="lazy"></div>'
-          if old in text: text=text.replace(old,new,1)
-          elif new not in text: raise SystemExit('platform card image markup not found')
-          error_listener="document.addEventListener('error',event=>{const img=event.target;if(!(img instanceof HTMLImageElement)||!img.closest('.course-logo')||img.dataset.fallback==='1')return;img.dataset.fallback='1';img.closest('.course-logo')?.classList.remove('course-photo');img.src='icon.svg';},true);\n"
-          dom_marker="document.addEventListener('DOMContentLoaded'"
-          if error_listener.strip() not in text:
-              idx=text.find(dom_marker)
-              if idx<0: raise SystemExit('platform DOMContentLoaded marker not found')
-              text=text[:idx]+error_listener+text[idx:]
-          detail.write_text(text,encoding='utf-8')
-
-          css=Path('css/style.css')
-          text=css.read_text(encoding='utf-8')
-          block="""
-
-/* Official course artwork from source platforms */
-.course-card .card-top:has(.course-logo.course-photo){min-height:170px;position:relative;overflow:hidden;border-radius:14px}
-.course-logo.course-photo{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;padding:0;background:var(--surface);overflow:hidden}
-.course-logo.course-photo img{width:100%;height:100%;object-fit:cover}
-.course-card .card-top:has(.course-logo.course-photo) .card-top-actions,.course-card .card-top:has(.course-logo.course-photo) .editorial-score{position:relative;z-index:2}
-"""
-          if '.course-logo.course-photo{' not in text:
-              text=text.rstrip()+block+'\n'
-          css.write_text(text,encoding='utf-8')
-          PY
+        run: python scripts/apply_course_image_ui.py
       - name: Test official image UI
         run: node --test tests/course-image-ui.test.js
       - name: Syntax check
         run: node --check js/app.js && node --check js/platform-detail.js
+      - name: Verify diff
+        run: git diff --check
       - name: Commit verified UI fix
         shell: bash
         run: |
           git config user.name "dunya-ui-bot"
           git config user.email "actions@users.noreply.github.com"
           git add js/app.js js/platform-detail.js css/style.css
-          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No UI changes"
+            exit 0
+          fi
           git commit -m "fix: display official FutureLearn course images"
           git push
