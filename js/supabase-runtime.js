@@ -74,6 +74,19 @@
     return await response.json();
   }
 
+  async function loadActivePlatforms(options){
+    const opts=options||{};
+    const base=cleanProjectUrl(opts.projectUrl);
+    if(!base) throw new Error('Supabase project URL is required');
+    const u=new URL(`${base}/rest/v1/platforms`);
+    u.searchParams.set('select','id,external_id,name,status,expected_count,expected_count_type,last_verified');
+    u.searchParams.set('status','eq.active');
+    u.searchParams.set('order','id.asc');
+    const rows=await getJson(u.toString(),opts.publishableKey,opts.fetchFn);
+    if(!Array.isArray(rows)) throw new Error('Supabase platforms response must be an array');
+    return rows;
+  }
+
   async function loadAllVerified(options){
     const opts=options||{};
     const pageSize=Math.max(1,Number(opts.pageSize||1000));
@@ -117,5 +130,5 @@
     return rows;
   }
 
-  return {normalizeCourseRow,coursesUrl,loadAllVerified,loadPlatformVerified,findPlatform};
+  return {normalizeCourseRow,coursesUrl,loadActivePlatforms,loadAllVerified,loadPlatformVerified,findPlatform};
 });
