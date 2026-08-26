@@ -46,10 +46,10 @@ jobs:
           PY
       - name: Supabase runtime tests
         run: node --test tests/supabase-runtime.test.js
-      - name: Active platform Supabase tests
-        run: node --test tests/supabase-platforms.test.js
       - name: Official course image UI tests
         run: node --test tests/course-image-ui.test.js
+      - name: Active platform Supabase tests
+        run: node --test tests/supabase-platforms.test.js
       - name: Homepage theme regression test
         run: node --test tests/theme-storage.test.js
       - name: Existing live catalog regression tests
