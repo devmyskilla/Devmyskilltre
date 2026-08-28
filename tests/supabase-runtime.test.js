@@ -23,7 +23,10 @@ test('Supabase runtime maps database rows into catalog courses', () => {
     is_free: true,
     has_certificate: false,
     duration_hours: 8,
-    thumbnail_url: 'https://example.com/image.png',
+    thumbnail_url: 'https://example.com/image.png?fit=crop&amp;w=1200',
+    image_verified: true,
+    image_source: 'og:image',
+    image_checked_at: '2026-08-28T00:00:00Z',
     source_url: 'https://example.com/course',
     status: 'verified',
     last_verified: '2026-08-26',
@@ -39,6 +42,17 @@ test('Supabase runtime maps database rows into catalog courses', () => {
   assert.deepEqual(course.language, ['en']);
   assert.equal(course.catalogOnly, true);
   assert.equal(course.sourceUrl, 'https://example.com/course');
+  assert.equal(course.imageVerified, true);
+  assert.equal(course.imageSource, 'og:image');
+  assert.equal(course.thumbnail, 'https://example.com/image.png?fit=crop&w=1200');
+});
+
+test('Supabase course query requests image verification metadata', () => {
+  const runtime = require(runtimePath);
+  const url = decodeURIComponent(runtime.coursesUrl({projectUrl:'https://demo.supabase.co',limit:1,offset:0}));
+  assert.match(url, /image_verified/);
+  assert.match(url, /image_source/);
+  assert.match(url, /image_checked_at/);
 });
 
 test('Supabase runtime paginates verified rows and sends publishable key as apikey', async () => {
