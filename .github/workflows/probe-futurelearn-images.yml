@@ -18,10 +18,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Inspect the current Reader representation before changing the parser.
           curl --fail --silent --show-error --max-time 60 \
             'https://r.jina.ai/https://www.futurelearn.com/courses?page=1' \
             -o /tmp/page.md
           echo '--- course/image lines ---'
-          grep -E -m 30 'futurelearn\.com/courses/|ugc\.futurelearn\.com' /tmp/page.md || true
-          echo '--- first 120 lines ---'
-          sed -n '1,120p' /tmp/page.md
+          grep -E -m 50 'futurelearn\.com/courses/|ugc\.futurelearn\.com|Find out more|Explore [0-9,]+ courses' /tmp/page.md || true
+          echo '--- first 180 lines ---'
+          sed -n '1,180p' /tmp/page.md
