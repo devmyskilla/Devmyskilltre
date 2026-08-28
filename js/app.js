@@ -112,13 +112,14 @@ function getVisibleCourses(){
 }
 
 function durationText(course){ return localizedValue(course.durationLabel)||getText('unknownDuration'); }
-function isOfficialCoursePhoto(course){ return /^https:\/\/ugc\.futurelearn\.com\//i.test(String(course?.thumbnail||'')); }
+function isOfficialCoursePhoto(course){ return course?.imageVerified === true && /^https?:\/\//i.test(String(course?.thumbnail||'')); }
 function courseImageClass(course){ return `course-logo${isOfficialCoursePhoto(course)?' course-photo':''}`; }
+function courseImageSrc(course){ if(isOfficialCoursePhoto(course)) return course.thumbnail; const platform=PLATFORMS_DATA.find(p=>p.id===course?.platformId); return platform?.thumbnail||'icon.svg'; }
 function cardHtml(course, compact=false){ const fav=favorites().has(course.id), compare=compareSet().has(course.id), views=viewCounts()[course.id]||0; const title=courseField(course,'title')||course.title||'Course', summary=courseField(course,'summary')||course.summary||getText('sourceOnlyCourse');
   const skills=Array.isArray(course.skills)?course.skills:[]; const score=course.catalogOnly?'↗':Number(course.editorialScore||0).toFixed(1); const level=course.level?levelLabel(course.level):'—';
   const target=course.catalogOnly?(course.sourceUrl||course.url||'#'):detailUrl(course); const targetAttrs=course.catalogOnly?' target="_blank" rel="noopener noreferrer"':''; const targetLabel=course.catalogOnly?getText('openOfficial'):getText('details');
   return `<article class="course-card ${compact?'compact-card':''}">
-    <div class="card-top"><div class="${courseImageClass(course)}"><img src="${escapeHtml(course.thumbnail||'icon.svg')}" alt="" loading="lazy"></div><div class="card-top-actions"><button class="round-btn ${fav?'active':''}" data-action="favorite" data-id="${course.id}" aria-label="favorite">♥</button><button class="round-btn ${compare?'active':''}" data-action="compare" data-id="${course.id}" aria-label="compare">⚖</button></div><span class="editorial-score">${score}</span></div>
+    <div class="card-top"><div class="${courseImageClass(course)}"><img src="${escapeHtml(courseImageSrc(course))}" alt="" loading="lazy"></div><div class="card-top-actions"><button class="round-btn ${fav?'active':''}" data-action="favorite" data-id="${course.id}" aria-label="favorite">♥</button><button class="round-btn ${compare?'active':''}" data-action="compare" data-id="${course.id}" aria-label="compare">⚖</button></div><span class="editorial-score">${score}</span></div>
     <div class="card-body"><div class="provider-line"><span>${escapeHtml(course.provider||course.platform||'')}</span><small>${escapeHtml(course.platform||'')}</small></div><h3>${escapeHtml(title)}</h3>${compact?'':`<p>${escapeHtml(summary)}</p>`}
     <div class="fact-row"><span>◷ ${escapeHtml(durationText(course))}</span><span>◎ ${escapeHtml(level)}</span></div>
     <div class="badge-row"><span class="badge ${course.free?'good':'soft'}">${course.free?getText('free'):getText('paid')}</span><span class="badge ${course.certificate?'good':'muted'}">${course.certificate?'🎓 '+getText('certificate'):getText('noCertificate')}</span>${course.unionPick?`<span class="badge accent">★ ${getText('developerPick')}</span>`:''}</div>
