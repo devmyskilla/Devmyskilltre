@@ -182,6 +182,9 @@ async function loadCatalogManifest(){
 async function loadSupabaseCatalog(){
   try{
     if(typeof SupabaseRuntime==='undefined'||typeof SUPABASE_CONFIG==='undefined') throw new Error('Supabase runtime/config missing');
+    const activePlatforms=await SupabaseRuntime.loadActivePlatforms({...SUPABASE_CONFIG});
+    const activePlatformIds=new Set(activePlatforms.map(p=>p.external_id));
+    PLATFORMS_DATA=PLATFORMS_DATA.filter(p=>activePlatformIds.has(p.id));
     const rows=await SupabaseRuntime.loadAllVerified({...SUPABASE_CONFIG,pageSize:1000,maxRows:50000});
     COURSES_DATA=rows;
     supabaseCatalogLoaded=true;
