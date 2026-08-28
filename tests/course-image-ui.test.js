@@ -4,16 +4,27 @@ const fs=require('node:fs');
 
 const app=fs.readFileSync('js/app.js','utf8');
 const platform=fs.readFileSync('js/platform-detail.js','utf8');
+const runtime=fs.readFileSync('js/supabase-runtime.js','utf8');
 const css=fs.readFileSync('css/style.css','utf8');
 
-test('homepage recognizes official FutureLearn UGC thumbnails as course photos',()=>{
-  assert.match(app,/ugc\\?\.futurelearn\\?\.com|ugc\.futurelearn\.com/i);
+test('Supabase runtime exposes image verification state to the UI',()=>{
+  assert.match(runtime,/image_verified/);
+  assert.match(runtime,/imageVerified/);
+});
+
+test('homepage treats any verified course artwork as a full course photo',()=>{
+  assert.match(app,/imageVerified\s*===\s*true/);
   assert.match(app,/course-photo/);
 });
 
-test('platform cards recognize official FutureLearn UGC thumbnails as course photos',()=>{
-  assert.match(platform,/ugc\\?\.futurelearn\\?\.com|ugc\.futurelearn\.com/i);
+test('platform cards treat any verified course artwork as a full course photo',()=>{
+  assert.match(platform,/imageVerified\s*===\s*true/);
   assert.match(platform,/course-photo/);
+});
+
+test('unverified database thumbnails are not promoted as course artwork',()=>{
+  assert.match(app,/courseImageSrc/);
+  assert.match(platform,/courseImageSrc/);
 });
 
 test('official course photos fill the card header and crop cleanly',()=>{
