@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'scripts/futurelearn-images.mjs'
+      - 'scripts/merge-futurelearn-images.mjs'
       - 'tests/futurelearn-images.test.mjs'
       - '.github/workflows/sync-futurelearn-images.yml'
 
@@ -16,9 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  sync:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,11 +26,50 @@ jobs:
           node-version: '22'
       - name: Test image mapping logic
         run: node --test tests/futurelearn-images.test.mjs
-      - name: Build official FutureLearn image map
+
+  sync:
+    needs: test
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve official course artwork from course pages
         env:
           FUTURELEARN_IMAGE_CONCURRENCY: '2'
-          FUTURELEARN_IMAGE_MAX_PAGES: '115'
+          FUTURELEARN_SHARD_COUNT: '6'
+          FUTURELEARN_SHARD_INDEX: ${{ matrix.shard }}
+          FUTURELEARN_IMAGE_OUTPUT: catalogs/validation/shards/plat-1-images-shard-${{ matrix.shard }}.json
         run: node scripts/futurelearn-images.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: futurelearn-images-${{ matrix.shard }}
+          path: catalogs/validation/shards/plat-1-images-shard-${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 1
+
+  merge:
+    needs: sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: futurelearn-images-*
+          path: catalogs/validation/shards
+          merge-multiple: true
+      - name: Merge verified image shards
+        run: node scripts/merge-futurelearn-images.mjs
       - name: Validate image map
         shell: bash
         run: |
@@ -39,7 +78,7 @@ jobs:
           const d=JSON.parse(fs.readFileSync('catalogs/validation/plat-1-images.json','utf8'));
           if(!d.count||d.count<1000) throw new Error(`too few official images: ${d.count||0}`);
           if(d.records.some(x=>!/^https:\/\/ugc\.futurelearn\.com\//.test(x.imageUrl))) throw new Error('non-official image found');
-          console.log('official images',d.count);
+          console.log('official images',d.count,'unresolved',d.failureCount||0);
           NODE
       - name: Commit official image map
         shell: bash
