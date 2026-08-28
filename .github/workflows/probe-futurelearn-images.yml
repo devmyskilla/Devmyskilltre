@@ -14,15 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Fetch one FutureLearn catalog page through Reader
+      - name: Fetch a non-featured FutureLearn course through Reader
         shell: bash
         run: |
           set -euo pipefail
-          # Inspect the current Reader representation before changing the parser.
           curl --fail --silent --show-error --max-time 60 \
-            'https://r.jina.ai/https://www.futurelearn.com/courses?page=1' \
-            -o /tmp/page.md
-          echo '--- course/image lines ---'
-          grep -E -m 50 'futurelearn\.com/courses/|ugc\.futurelearn\.com|Find out more|Explore [0-9,]+ courses' /tmp/page.md || true
-          echo '--- first 180 lines ---'
-          sed -n '1,180p' /tmp/page.md
+            'https://r.jina.ai/https://www.futurelearn.com/courses/health-research-ethics' \
+            -o /tmp/course.md
+          echo '--- official artwork lines ---'
+          grep -E -m 30 'ugc\.futurelearn\.com|header_|thumbnail_|Image' /tmp/course.md || true
+          echo '--- first 140 lines ---'
+          sed -n '1,140p' /tmp/course.md
