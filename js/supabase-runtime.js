@@ -5,12 +5,16 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
   const COURSE_SELECT = [
     'id','external_id','title','provider','short_description','level','languages','is_free','has_certificate',
-    'duration_hours','thumbnail_url','source_url','status','last_verified',
+    'duration_hours','thumbnail_url','image_verified','image_source','image_checked_at','source_url','status','last_verified',
     'platforms!inner(id,external_id,name)','categories(id,slug,name)'
   ].join(',');
 
   function cleanProjectUrl(value){
     return String(value||'').replace(/\/+$/,'');
+  }
+
+  function cleanImageUrl(value){
+    return String(value||'').replace(/&amp;/gi,'&');
   }
 
   function normalizeCourseRow(row){
@@ -39,7 +43,10 @@
       audience:[],
       prerequisites:[],
       editorialScore:0,
-      thumbnail:r.thumbnail_url||'icon.svg',
+      thumbnail:cleanImageUrl(r.thumbnail_url)||'icon.svg',
+      imageVerified:r.image_verified===true,
+      imageSource:r.image_source||null,
+      imageCheckedAt:r.image_checked_at||null,
       sourceUrl:r.source_url||'#',
       status:r.status||'verified',
       lastVerified:r.last_verified||null,
