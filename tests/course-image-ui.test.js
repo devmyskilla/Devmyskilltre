@@ -2,6 +2,7 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 
+// Regression coverage: only Supabase-verified artwork may render as a large course photo.
 const app=fs.readFileSync('js/app.js','utf8');
 const platform=fs.readFileSync('js/platform-detail.js','utf8');
 const runtime=fs.readFileSync('js/supabase-runtime.js','utf8');
