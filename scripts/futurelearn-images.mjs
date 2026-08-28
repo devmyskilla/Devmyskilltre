@@ -4,10 +4,13 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const OUTPUT=path.join(ROOT,'catalogs','validation','plat-1-images.json');
 const VALIDATION=path.join(ROOT,'catalogs','validation','plat-1.json');
 const CONCURRENCY=Math.max(1,Number(process.env.FUTURELEARN_IMAGE_CONCURRENCY||2));
-const MAX_PAGES=Math.max(1,Number(process.env.FUTURELEARN_IMAGE_MAX_PAGES||115));
+const SHARD_COUNT=Math.max(1,Number(process.env.FUTURELEARN_SHARD_COUNT||1));
+const SHARD_INDEX=Math.max(0,Number(process.env.FUTURELEARN_SHARD_INDEX||0));
+const OUTPUT=process.env.FUTURELEARN_IMAGE_OUTPUT
+  ? path.resolve(ROOT,process.env.FUTURELEARN_IMAGE_OUTPUT)
+  : path.join(ROOT,'catalogs','validation',SHARD_COUNT>1?`plat-1-images-shard-${SHARD_INDEX}.json`:'plat-1-images.json');
 const READER_BASE='https://r.jina.ai/';
 const ACTIVE_STATUSES=new Set(['active-listed','redirected-active-listed','active-unlisted','redirected-active-unlisted']);
 
@@ -44,29 +47,30 @@ export function extractCourseImagePairs(markdown){
 }
 
 export function extractPrimaryCourseImage(markdown){
-  for(const match of String(markdown||'').matchAll(/!\[[^\]]*\]\((https:\/\/ugc\.futurelearn\.com\/[^)\s]+)\)/gi)){
-    const url=match[1].replace(/&amp;/g,'&');
-    if(/\/(?:header|thumbnail)_[^/]+\.(?:jpe?g|png|webp)(?:\?.*)?$/i.test(url))return url;
-  }
-  const fallback=String(markdown||'').match(/!\[[^\]]*\]\((https:\/\/ugc\.futurelearn\.com\/[^)\s]+)\)/i);
-  return fallback?fallback[1].replace(/&amp;/g,'&'):'';
+  const text=String(markdown||'');
+  // A FutureLearn course page can contain unrelated featured-course thumbnails
+  // before the current course. The current course artwork is the header_* image.
+  const header=text.match(/!\[[^\]]*\]\((https:\/\/ugc\.futurelearn\.com\/[^)\s]*\/header_[^)\s]+)\)/i);
+  if(header)return header[1].replace(/&amp;/g,'&');
+  const thumbnail=text.match(/!\[[^\]]*\]\((https:\/\/ugc\.futurelearn\.com\/[^)\s]*\/thumbnail_[^)\s]+)\)/i);
+  return thumbnail?thumbnail[1].replace(/&amp;/g,'&'):'';
 }
 
-async function fetchReader(targetUrl,{attempts=4}={}){
+async function fetchReader(targetUrl,{attempts=6}={}){
   const url=`${READER_BASE}${targetUrl}`;
   let lastError='unknown';
   for(let attempt=1;attempt<=attempts;attempt++){
     const controller=new AbortController();
     const timer=setTimeout(()=>controller.abort(),60000);
     try{
-      const response=await fetch(url,{signal:controller.signal,headers:{'accept':'text/plain','user-agent':'DunyaAlDawratImageSync/1.0'}});
+      const response=await fetch(url,{signal:controller.signal,headers:{accept:'text/plain','user-agent':'DunyaAlDawratImageSync/2.0'}});
       const body=await response.text();
       if(response.ok)return body;
       lastError=`HTTP ${response.status}`;
       if(response.status!==429&&response.status<500)break;
     }catch(error){lastError=error?.name==='AbortError'?'timeout':String(error?.message||error)}
     finally{clearTimeout(timer)}
-    if(attempt<attempts)await sleep(Math.min(30000,4000*attempt));
+    if(attempt<attempts)await sleep(Math.min(45000,5000*Math.pow(2,attempt-1)));
   }
   throw new Error(`${lastError} reading ${targetUrl}`);
 }
@@ -79,6 +83,8 @@ async function mapLimit(items,limit,worker){
       const index=cursor++;
       if(index>=items.length)return;
       results[index]=await worker(items[index],index);
+      // Small per-worker pause lowers the chance of reader rate limiting.
+      await sleep(600);
     }
   }
   await Promise.all(Array.from({length:Math.min(limit,items.length||1)},run));
@@ -99,74 +105,44 @@ function readValidation(){
   return {report,active:[...dedup.values()]};
 }
 
-async function crawlCatalog(){
-  const first=await fetchReader('https://www.futurelearn.com/courses?page=1');
-  const total=extractCourseCountFromMarkdown(first);
-  const imageMap=new Map(extractCourseImagePairs(first).map(x=>[x.sourceUrl,x.imageUrl]));
-  const pages=[];
-  pages.push({page:1,pairs:extractCourseImagePairs(first).length,totalMapped:imageMap.size});
-  const estimated=total?Math.ceil(total/16)+3:MAX_PAGES;
-  const maxPages=Math.min(MAX_PAGES,Math.max(1,estimated));
-  const pageNumbers=Array.from({length:Math.max(0,maxPages-1)},(_,i)=>i+2);
-  let completed=1;
-  await mapLimit(pageNumbers,CONCURRENCY,async page=>{
-    const md=await fetchReader(`https://www.futurelearn.com/courses?page=${page}`);
-    const pairs=extractCourseImagePairs(md);
-    for(const pair of pairs)if(!imageMap.has(pair.sourceUrl))imageMap.set(pair.sourceUrl,pair.imageUrl);
-    completed++;
-    pages.push({page,pairs:pairs.length,totalMapped:imageMap.size});
-    if(completed%10===0||completed===maxPages)console.log(`Catalog pages ${completed}/${maxPages}; mapped ${imageMap.size} course images`);
-    return pairs.length;
-  });
-  pages.sort((a,b)=>a.page-b.page);
-  return {total,maxPages,imageMap,pages};
-}
-
 async function main(){
   if(!fs.existsSync(VALIDATION))throw new Error('Missing catalogs/validation/plat-1.json');
+  if(SHARD_INDEX>=SHARD_COUNT)throw new Error(`Invalid shard ${SHARD_INDEX}/${SHARD_COUNT}`);
   const {report,active}=readValidation();
-  console.log(`Active FutureLearn records from validation report: ${active.length}`);
+  const shard=active.filter((_,index)=>index%SHARD_COUNT===SHARD_INDEX);
+  console.log(`FutureLearn active records: ${active.length}; shard ${SHARD_INDEX+1}/${SHARD_COUNT}: ${shard.length}`);
 
-  const catalog=await crawlCatalog();
-  console.log(`FutureLearn catalogue headline: ${catalog.total??'unknown'}; official image pairs mapped: ${catalog.imageMap.size}`);
-
-  const finalMap=new Map();
-  const unresolved=[];
-  for(const item of active){
-    const image=catalog.imageMap.get(item.sourceUrl)||catalog.imageMap.get(item.finalUrl)||'';
-    if(image)finalMap.set(item.sourceUrl,image);
-    else unresolved.push(item);
-  }
-  console.log(`Active records resolved from catalogue pages: ${finalMap.size}; unresolved active records: ${unresolved.length}`);
-
+  const records=[];
   const failures=[];
-  let directDone=0;
-  await mapLimit(unresolved,CONCURRENCY,async item=>{
+  let done=0;
+  await mapLimit(shard,CONCURRENCY,async item=>{
     try{
-      const md=await fetchReader(item.finalUrl||item.sourceUrl);
-      const image=extractPrimaryCourseImage(md);
-      if(image)finalMap.set(item.sourceUrl,image);
-      else failures.push({...item,error:'no official UGC image found'});
-    }catch(error){failures.push({...item,error:String(error?.message||error)});}
-    directDone++;
-    if(directDone%10===0||directDone===unresolved.length)console.log(`Direct fallback ${directDone}/${unresolved.length}; total mapped ${finalMap.size}`);
+      const markdown=await fetchReader(item.finalUrl||item.sourceUrl);
+      const imageUrl=extractPrimaryCourseImage(markdown);
+      if(imageUrl){
+        records.push({id:item.id,sourceUrl:item.sourceUrl,imageUrl,validationStatus:item.status});
+      }else{
+        failures.push({...item,error:'no current-course header/thumbnail image found'});
+      }
+    }catch(error){
+      failures.push({...item,error:String(error?.message||error)});
+    }
+    done++;
+    if(done%25===0||done===shard.length)console.log(`Shard ${SHARD_INDEX+1}: ${done}/${shard.length}; images ${records.length}; failures ${failures.length}`);
   });
 
-  const records=active
-    .filter(item=>finalMap.has(item.sourceUrl))
-    .map(item=>({id:item.id,sourceUrl:item.sourceUrl,imageUrl:finalMap.get(item.sourceUrl),validationStatus:item.status}));
-
+  records.sort((a,b)=>a.sourceUrl.localeCompare(b.sourceUrl));
+  failures.sort((a,b)=>a.sourceUrl.localeCompare(b.sourceUrl));
   const output={
-    schemaVersion:1,
+    schemaVersion:2,
     platformId:'plat-1',
     platform:'FutureLearn',
     generatedAt:new Date().toISOString(),
     validationVerifiedAt:report.verifiedAt||null,
     activeRecordCount:active.length,
-    catalogHeadlineCount:catalog.total,
-    catalogPagesFetched:catalog.maxPages,
-    catalogImagePairCount:catalog.imageMap.size,
-    directFallbackAttemptCount:unresolved.length,
+    shardIndex:SHARD_INDEX,
+    shardCount:SHARD_COUNT,
+    shardRecordCount:shard.length,
     failureCount:failures.length,
     count:records.length,
     failures,
@@ -174,8 +150,8 @@ async function main(){
   };
   fs.mkdirSync(path.dirname(OUTPUT),{recursive:true});
   fs.writeFileSync(OUTPUT,JSON.stringify(output,null,2)+'\n');
-  console.log(`Official image map written: ${path.relative(ROOT,OUTPUT)} (${records.length}/${active.length})`);
-  if(records.length<1000)throw new Error(`Only ${records.length} active FutureLearn images were resolved`);
+  console.log(`FutureLearn image shard written: ${path.relative(ROOT,OUTPUT)} (${records.length}/${shard.length})`);
+  if(records.length===0)throw new Error('No FutureLearn course images were resolved in this shard');
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
