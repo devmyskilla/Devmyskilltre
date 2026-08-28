@@ -1,3 +1,4 @@
+// Platform 1 of the active 40-platform catalog scope.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
