@@ -14,14 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Fetch a non-featured FutureLearn course through Reader
+      - name: Fetch FutureLearn course HTML directly
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --max-time 60 \
-            'https://r.jina.ai/https://www.futurelearn.com/courses/health-research-ethics' \
-            -o /tmp/course.md
-          echo '--- official artwork lines ---'
-          grep -E -m 30 'ugc\.futurelearn\.com|header_|thumbnail_|Image' /tmp/course.md || true
-          echo '--- first 140 lines ---'
-          sed -n '1,140p' /tmp/course.md
+          url='https://www.futurelearn.com/courses/health-research-ethics'
+          code=$(curl -L --silent --show-error --max-time 30 \
+            -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36' \
+            -w '%{http_code}' -o /tmp/course.html "$url")
+          echo "HTTP $code bytes $(wc -c </tmp/course.html)"
+          echo '--- image metadata ---'
+          grep -Eio -m 20 '<meta[^>]+(og:image|twitter:image)[^>]+>|https://ugc\.futurelearn\.com/[^"'"'"' <)]+' /tmp/course.html || true
+          echo '--- title ---'
+          grep -Eio -m 3 '<title>[^<]+'</title' /tmp/course.html || true
