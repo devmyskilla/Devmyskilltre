@@ -29,9 +29,23 @@ test('extractCourseCountFromMarkdown reads current Explore count',()=>{
   assert.equal(extractCourseCountFromMarkdown('## Explore 1,698 courses'),1698);
 });
 
-test('extractPrimaryCourseImage returns first official UGC image from a course page',()=>{
+test('extractPrimaryCourseImage returns official course hero image',()=>{
   const md=`# A course\n![Hero](https://ugc.futurelearn.com/uploads/images/aa/bb/header_x.jpg)\n![Other](https://ugc.futurelearn.com/uploads/images/cc/dd/step.jpg)`;
   assert.equal(extractPrimaryCourseImage(md),'https://ugc.futurelearn.com/uploads/images/aa/bb/header_x.jpg');
+});
+
+test('extractPrimaryCourseImage prefers the current course header over unrelated featured thumbnails',()=>{
+  const md=`
+[![Featured](https://ugc.futurelearn.com/uploads/images/11/22/thumbnail_featured.jpg)](https://www.futurelearn.com/courses/featured-course)
+[![Another](https://ugc.futurelearn.com/uploads/images/33/44/thumbnail_other.jpg)](https://www.futurelearn.com/courses/another-course)
+![Current course hero](https://ugc.futurelearn.com/uploads/images/68/65/header_current-course.jpg)
+`;
+  assert.equal(extractPrimaryCourseImage(md),'https://ugc.futurelearn.com/uploads/images/68/65/header_current-course.jpg');
+});
+
+test('extractPrimaryCourseImage falls back to a thumbnail when no header exists',()=>{
+  const md=`![Course](https://ugc.futurelearn.com/uploads/images/aa/bb/thumbnail_course.jpg)`;
+  assert.equal(extractPrimaryCourseImage(md),'https://ugc.futurelearn.com/uploads/images/aa/bb/thumbnail_course.jpg');
 });
 
 test('canonicalFutureLearnCourseUrl strips query, hash and run suffix',()=>{
