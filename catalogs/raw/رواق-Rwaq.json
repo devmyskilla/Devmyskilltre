@@ -11,6 +11,20 @@
     "free": true,
     "certificate": true,
     "language": "عربي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
+  },
+  {
+    "id": "plat-33-catalog-2",
+    "title": "Courses",
+    "summary": "",
+    "platform": "رواق Rwaq",
+    "provider": "رواق Rwaq",
+    "sourceUrl": "https://rwaq.org/courses",
+    "thumbnail": "https://rwaq-production.s3.amazonaws.com/uploads/rwaq_image_params/platform-logo-sidebar.png",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "عربي",
+    "lastVerified": "2026-08-30"
   }
 ]

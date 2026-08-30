@@ -11,7 +11,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-2",
@@ -25,7 +25,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-3",
@@ -39,7 +39,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-4",
@@ -53,7 +53,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-5",
@@ -67,7 +67,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-6",
@@ -81,7 +81,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-7",
@@ -95,7 +95,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-8",
@@ -109,7 +109,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-9",
@@ -123,7 +123,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-10",
@@ -137,7 +137,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-11",
@@ -151,7 +151,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-12",
@@ -165,7 +165,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-13",
@@ -179,7 +179,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-14",
@@ -193,24 +193,10 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-15",
-    "title": "React",
-    "summary": "React is completely transforming the front-end development landscape. Master this powerful UI library and gain career-ready skills by moving from foundational components to professional-grade architecture. You’ll begin by building declarative web user interfaces, mastering JSX, props, and functional state management. As you progress, you’ll dive into intermediate patterns for building resilient, scalable applications. This includes implementing seamless navigation with client-side routing, optimizing performance, and handling complex data fetching to ensure your apps remain responsive and reliable. Finally, you’ll learn to manage application state more predictably using industry-standard patterns and ensure your code is production-ready through comprehensive testing and debugging.",
-    "platform": "Udacity",
-    "provider": "Udacity",
-    "sourceUrl": "https://www.udacity.com/course/react-nanodegree--nd019",
-    "thumbnail": "https://www.google.com/s2/favicons?domain=udacity.com&sz=128",
-    "recordType": "source-only",
-    "free": true,
-    "certificate": true,
-    "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
-  },
-  {
-    "id": "plat-58-catalog-16",
     "title": "Generative AI",
     "summary": "Ready to build production-grade AI? This program equips developers to deploy reliable generative AI solutions. We'll move past theory and focus on the proven implementation patterns you need. You'll master production essentials like model selection, cost estimation, and reliable prompt engineering to build efficient apps. You'll also implement lightweight model adaptation using PEFT. Then, you'll build end-to-end RAG systems, using vector databases to connect LLMs to your data and evaluate quality with frameworks like RAGAs. Finally, you'll dive into advanced multimodal applications that process text, images, and audio. You'll enforce structured outputs with Pydantic and implement system observability to build, trace, and debug modern AI apps.",
     "platform": "Udacity",
@@ -221,7 +207,21 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
+  },
+  {
+    "id": "plat-58-catalog-16",
+    "title": "React",
+    "summary": "React is completely transforming the front-end development landscape. Master this powerful UI library and gain career-ready skills by moving from foundational components to professional-grade architecture. You’ll begin by building declarative web user interfaces, mastering JSX, props, and functional state management. As you progress, you’ll dive into intermediate patterns for building resilient, scalable applications. This includes implementing seamless navigation with client-side routing, optimizing performance, and handling complex data fetching to ensure your apps remain responsive and reliable. Finally, you’ll learn to manage application state more predictably using industry-standard patterns and ensure your code is production-ready through comprehensive testing and debugging.",
+    "platform": "Udacity",
+    "provider": "Udacity",
+    "sourceUrl": "https://www.udacity.com/course/react-nanodegree--nd019",
+    "thumbnail": "https://www.google.com/s2/favicons?domain=udacity.com&sz=128",
+    "recordType": "source-only",
+    "free": true,
+    "certificate": true,
+    "language": "إنجليزي",
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-17",
@@ -235,7 +235,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-18",
@@ -249,7 +249,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-19",
@@ -263,7 +263,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-20",
@@ -277,7 +277,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-21",
@@ -291,7 +291,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-22",
@@ -305,7 +305,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-23",
@@ -319,7 +319,7 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   },
   {
     "id": "plat-58-catalog-24",
@@ -333,6 +333,6 @@
     "free": true,
     "certificate": true,
     "language": "إنجليزي",
-    "lastVerified": "2026-08-23"
+    "lastVerified": "2026-08-30"
   }
 ]
